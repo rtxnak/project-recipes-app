@@ -5,13 +5,26 @@ import GlobalContext from './GlobalContext';
 export default function GlobalProvider({ children }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [buttonLogin, setButtonLogin] = useState({ disabledButt: true });
+
+  const validateButton = () => {
+    const emailValid = /\S+@\S+\.\S+/.test(email);
+    const passwordLength = 6;
+    if (emailValid && password.length >= passwordLength) {
+      setButtonLogin({ disabledButt: false });
+    } else {
+      setButtonLogin({ disabledButt: true });
+    }
+  };
 
   const handleEmail = ({ target: { value } }) => {
     setEmail(value);
+    validateButton();
   };
 
   const handlePassword = ({ target: { value } }) => {
     setPassword(value);
+    validateButton();
   };
 
   const contextValue = {
@@ -19,6 +32,8 @@ export default function GlobalProvider({ children }) {
     email,
     handlePassword,
     password,
+    buttonLogin,
+    setButtonLogin,
   };
   return (
     <GlobalContext.Provider value={ contextValue }>
