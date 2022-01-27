@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from '../../components/button/Button';
 import Input from '../../components/input/Input';
+import GlobalContext from '../../context/GlobalContext';
 
 function Login() {
+  const {
+    handleEmail,
+    email,
+  } = useContext(GlobalContext);
+
   return (
     <div>
       <h1>LOGIN</h1>
@@ -10,9 +16,9 @@ function Login() {
         testid="email-input"
         type="email"
         placeholder="Email"
-        name="email"
-        // onChange={ onChange }
-        value="E-mail"
+        name={ email }
+        onChange={ handleEmail }
+        value={ email }
       />
       <Input
         testid="password-input"
