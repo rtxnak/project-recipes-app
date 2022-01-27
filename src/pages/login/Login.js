@@ -7,6 +7,8 @@ function Login() {
   const {
     handleEmail,
     email,
+    handlePassword,
+    password,
   } = useContext(GlobalContext);
 
   return (
@@ -24,9 +26,9 @@ function Login() {
         testid="password-input"
         type="password"
         placeholder="Password"
-        name="password"
-        // onChange={ onChange }
-        value="password"
+        name={ password }
+        onChange={ handlePassword }
+        value={ password }
       />
       <Button
         type="button"
