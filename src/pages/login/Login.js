@@ -9,8 +9,9 @@ function Login() {
     email,
     handlePassword,
     password,
+    buttonLogin,
   } = useContext(GlobalContext);
-
+  console.log(buttonLogin);
   return (
     <div>
       <h1>LOGIN</h1>
@@ -34,7 +35,8 @@ function Login() {
         type="button"
         label="ENTER"
         testid="login-submit-btn"
-        // onClick={ onClick }
+        // onClick={ () => validateButton }
+        disabled={ buttonLogin.disabledButt }
       />
     </div>
   );
