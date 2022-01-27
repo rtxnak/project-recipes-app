@@ -4,14 +4,21 @@ import GlobalContext from './GlobalContext';
 
 export default function GlobalProvider({ children }) {
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleEmail = ({ target: { value } }) => {
     setEmail(value);
   };
 
+  const handlePassword = ({ target: { value } }) => {
+    setPassword(value);
+  };
+
   const contextValue = {
     handleEmail,
     email,
+    handlePassword,
+    password,
   };
   return (
     <GlobalContext.Provider value={ contextValue }>
