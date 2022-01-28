@@ -13,7 +13,6 @@ function Login({ history }) {
     buttonLogin,
     handleClick,
   } = useContext(GlobalContext);
-  console.log(buttonLogin);
   return (
     <div>
       <h1>LOGIN</h1>
