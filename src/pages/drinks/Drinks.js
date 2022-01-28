@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../../components/footer/Footer';
 import Header from '../../components/header/Header';
 
 export default function Drinks() {
@@ -8,6 +9,7 @@ export default function Drinks() {
         label="Drinks"
         testid="page-title"
       />
+      <Footer />
     </div>
   );
 }
