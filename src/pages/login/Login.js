@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import Button from '../../components/button/Button';
 import Input from '../../components/input/Input';
 import GlobalContext from '../../context/GlobalContext';
 
-function Login() {
+function Login({ history }) {
   const {
     handleEmail,
     email,
@@ -36,11 +37,18 @@ function Login() {
         type="button"
         label="ENTER"
         testid="login-submit-btn"
-        onClick={ handleClick }
+        onClick={ () => {
+          handleClick();
+          history.push('/foods');
+        } }
         disabled={ buttonLogin.disabledButt }
       />
     </div>
   );
 }
+
+Login.propTypes = {
+  history: PropTypes.node.isRequired,
+};
 
 export default Login;
