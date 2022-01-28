@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
+import GlobalContext from '../../context/GlobalContext';
+import SearchBar from '../searchBar/SearchBar';
 
 function Header(props) {
   const {
@@ -12,9 +14,15 @@ function Header(props) {
 
   const history = useHistory();
 
+  const {
+    showSearchBar,
+    setShowSearchBar,
+  } = useContext(GlobalContext);
+
   const searchButton = () => (
     <button
       type="button"
+      onClick={ () => setShowSearchBar(!showSearchBar) }
     >
       <img
         data-testid="search-top-btn"
@@ -55,6 +63,7 @@ function Header(props) {
         <h1>{ label }</h1>
       </header>
       { displaySearchButton() }
+      { showSearchBar && <SearchBar /> }
     </div>
   );
 }

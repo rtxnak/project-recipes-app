@@ -6,6 +6,7 @@ export default function GlobalProvider({ children }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [buttonLogin, setButtonLogin] = useState({ disabledButt: true });
+  const [showSearchBar, setShowSearchBar] = useState(false);
 
   const validateButton = () => {
     const emailValid = /\S+@\S+\.\S+/.test(email);
@@ -41,6 +42,8 @@ export default function GlobalProvider({ children }) {
     buttonLogin,
     setButtonLogin,
     handleClick,
+    showSearchBar,
+    setShowSearchBar,
   };
   return (
     <GlobalContext.Provider value={ contextValue }>
