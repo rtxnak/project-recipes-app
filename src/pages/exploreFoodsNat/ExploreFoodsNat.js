@@ -1,9 +1,13 @@
 import React from 'react';
+import Header from '../../components/header/Header';
 
 function ExploreFoodsNat() {
   return (
     <div>
-      Explore Foods Nat
+      <Header
+        label="Explore Nationalities"
+        testid="page-title"
+      />
     </div>
   );
 }

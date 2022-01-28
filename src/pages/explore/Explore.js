@@ -1,9 +1,13 @@
 import React from 'react';
+import Header from '../../components/header/Header';
 
 function Explore() {
   return (
     <div>
-      Explore
+      <Header
+        label="Explore"
+        testid="page-title"
+      />
     </div>
   );
 }
