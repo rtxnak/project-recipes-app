@@ -30,6 +30,7 @@ export default function GlobalProvider({ children }) {
   const handleClick = () => {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
+    localStorage.setItem('user', JSON.stringify({ email }));
   };
   const contextValue = {
     handleEmail,
