@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 
@@ -8,6 +9,8 @@ function Header(props) {
     label,
     testid,
   } = props;
+
+  const history = useHistory();
 
   const searchButton = () => (
     <button
@@ -29,10 +32,16 @@ function Header(props) {
     }
   };
 
+  const handleClickProfile = () => {
+    history.push('/profile');
+    console.log(history);
+  };
+
   return (
     <div>
       <button
         type="button"
+        onClick={ handleClickProfile }
       >
         <img
           data-testid="profile-top-btn"
@@ -51,8 +60,9 @@ function Header(props) {
 }
 
 Header.propTypes = {
-  label: PropTypes.string.isRequired,
-  testid: PropTypes.string.isRequired,
-};
+  label: PropTypes.string,
+  testid: PropTypes.string,
+  // history: PropTypes.node,
+}.isRequired;
 
 export default Header;
