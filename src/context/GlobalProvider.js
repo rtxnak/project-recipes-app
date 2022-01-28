@@ -27,6 +27,10 @@ export default function GlobalProvider({ children }) {
     validateButton();
   };
 
+  const handleClick = () => {
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+  };
   const contextValue = {
     handleEmail,
     email,
@@ -34,6 +38,7 @@ export default function GlobalProvider({ children }) {
     password,
     buttonLogin,
     setButtonLogin,
+    handleClick,
   };
   return (
     <GlobalContext.Provider value={ contextValue }>
