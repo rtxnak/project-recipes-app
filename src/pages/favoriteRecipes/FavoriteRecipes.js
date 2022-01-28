@@ -1,9 +1,13 @@
 import React from 'react';
+import Header from '../../components/header/Header';
 
 function FavoriteRecipes() {
   return (
     <div>
-      Favorite Recipes
+      <Header
+        label="Favorite Recipes"
+        testid="page-title"
+      />
     </div>
   );
 }

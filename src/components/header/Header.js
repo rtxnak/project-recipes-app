@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import profileIcon from '../../images/profileIcon.svg';
+import searchIcon from '../../images/searchIcon.svg';
 
 function Header(props) {
   const {
@@ -7,26 +9,43 @@ function Header(props) {
     testid,
   } = props;
 
+  const searchButton = () => (
+    <button
+      type="button"
+    >
+      <img
+        data-testid="search-top-btn"
+        src={ searchIcon }
+        alt="SearchIcon"
+      />
+    </button>
+  );
+
+  const displaySearchButton = () => {
+    if (label === 'Foods'
+      || label === 'Explore Nationalities'
+      || label === 'Drinks') {
+      return searchButton();
+    }
+  };
+
   return (
     <div>
       <button
-        data-testid="profile-top-btn"
         type="button"
       >
-        Profile
+        <img
+          data-testid="profile-top-btn"
+          src={ profileIcon }
+          alt="ProfileIcon"
+        />
       </button>
       <header
         data-testid={ testid }
       >
         <h1>{ label }</h1>
       </header>
-
-      <button
-        data-testid="search-top-btn"
-        type="button"
-      >
-        Search
-      </button>
+      { displaySearchButton() }
     </div>
   );
 }
