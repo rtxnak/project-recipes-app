@@ -10,6 +10,7 @@ function Profile() {
         testid="page-title"
       />
       <Footer />
+
     </div>
   );
 }
