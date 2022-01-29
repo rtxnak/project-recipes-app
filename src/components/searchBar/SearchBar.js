@@ -2,30 +2,14 @@ import React, { useContext } from 'react';
 import Button from '../button/Button';
 import Input from '../input/Input';
 import GlobalContext from '../../context/GlobalContext';
-import fetchAPI from '../../services/fetchAPI';
 
 function SearchBar() {
   const {
     search,
     setBySearch,
-    radioSelected,
     setRadioSelected,
+    handleSearchClick,
   } = useContext(GlobalContext);
-
-  const handleSearchClick = () => {
-    if (radioSelected === 'ingredients') {
-      fetchAPI('fetchMealByIngredient', search)
-        .then((data) => console.log(data));
-    }
-    if (radioSelected === 'name') {
-      fetchAPI('fetchMealByName', search)
-        .then((data) => console.log(data));
-    }
-    if (radioSelected === 'firstLetter') {
-      fetchAPI('fetchMealByFirstLetter', search)
-        .then((data) => console.log(data));
-    }
-  };
 
   return (
     <div>

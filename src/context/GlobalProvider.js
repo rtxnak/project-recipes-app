@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
 import GlobalContext from './GlobalContext';
+import fetchAPI from '../services/fetchAPI';
 
 export default function GlobalProvider({ children }) {
   const [email, setEmail] = useState('');
@@ -36,6 +38,39 @@ export default function GlobalProvider({ children }) {
     localStorage.setItem('user', JSON.stringify({ email }));
   };
 
+  const location = useLocation();
+
+  const handleSearchClick = () => {
+    if (location.pathname === '/foods') {
+      if (radioSelected === 'ingredients') {
+        fetchAPI('fetchMealByIngredient', search)
+          .then((data) => console.log(data));
+      }
+      if (radioSelected === 'name') {
+        fetchAPI('fetchMealByName', search)
+          .then((data) => console.log(data));
+      }
+      if (radioSelected === 'firstLetter') {
+        fetchAPI('fetchMealByFirstLetter', search)
+          .then((data) => console.log(data));
+      }
+    }
+    if (location.pathname === '/drinks') {
+      if (radioSelected === 'ingredients') {
+        fetchAPI('fetchCocktailByIngredient', search)
+          .then((data) => console.log(data));
+      }
+      if (radioSelected === 'name') {
+        fetchAPI('fetchCocktailByName', search)
+          .then((data) => console.log(data));
+      }
+      if (radioSelected === 'firstLetter') {
+        fetchAPI('fetchCocktailByFirstLetter', search)
+          .then((data) => console.log(data));
+      }
+    }
+  };
+
   const contextValue = {
     handleEmail,
     email,
@@ -50,6 +85,7 @@ export default function GlobalProvider({ children }) {
     setBySearch,
     radioSelected,
     setRadioSelected,
+    handleSearchClick,
   };
   return (
     <GlobalContext.Provider value={ contextValue }>
