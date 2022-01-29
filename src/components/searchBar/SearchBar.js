@@ -1,17 +1,41 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from '../button/Button';
 import Input from '../input/Input';
+import GlobalContext from '../../context/GlobalContext';
+import fetchAPI from '../../services/fetchAPI';
 
 function SearchBar() {
+  const {
+    search,
+    setBySearch,
+    radioSelected,
+    setRadioSelected,
+  } = useContext(GlobalContext);
+
+  const handleSearchClick = () => {
+    if (radioSelected === 'ingredients') {
+      fetchAPI('fetchMealByIngredient', search)
+        .then((data) => console.log(data));
+    }
+    if (radioSelected === 'name') {
+      fetchAPI('fetchMealByName', search)
+        .then((data) => console.log(data));
+    }
+    if (radioSelected === 'firstLetter') {
+      fetchAPI('fetchMealByFirstLetter', search)
+        .then((data) => console.log(data));
+    }
+  };
+
   return (
     <div>
       <Input
         placeholder="Search Recipe"
         name="searchBar"
-        // onChange
+        onChange={ ({ target: { value } }) => setBySearch(value) }
         type="text"
         testid="search-input"
-        value="searchBar"
+        value={ search }
       />
       <label htmlFor="ingredients">
         Ingredient
@@ -19,7 +43,8 @@ function SearchBar() {
           data-testid="ingredient-search-radio"
           type="radio"
           value="ingredients"
-          name="firstLetter"
+          name="searchRadios"
+          onChange={ ({ target: { value } }) => setRadioSelected(value) }
         />
       </label>
       <label htmlFor="name">
@@ -28,7 +53,8 @@ function SearchBar() {
           data-testid="name-search-radio"
           type="radio"
           value="name"
-          name="firstLetter"
+          name="searchRadios"
+          onChange={ ({ target: { value } }) => setRadioSelected(value) }
         />
       </label>
       <label htmlFor="firstLetter">
@@ -37,14 +63,15 @@ function SearchBar() {
           data-testid="first-letter-search-radio"
           type="radio"
           value="firstLetter"
-          name="firstLetter"
+          name="searchRadios"
+          onChange={ ({ target: { value } }) => setRadioSelected(value) }
         />
       </label>
 
       <Button
         label="Search"
         testid="exec-search-btn"
-        // onClick
+        onClick={ handleSearchClick }
         // disabled=""
       />
     </div>

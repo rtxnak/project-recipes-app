@@ -7,6 +7,8 @@ export default function GlobalProvider({ children }) {
   const [password, setPassword] = useState('');
   const [buttonLogin, setButtonLogin] = useState({ disabledButt: true });
   const [showSearchBar, setShowSearchBar] = useState(false);
+  const [search, setBySearch] = useState('');
+  const [radioSelected, setRadioSelected] = useState('');
 
   const validateButton = () => {
     const emailValid = /\S+@\S+\.\S+/.test(email);
@@ -44,6 +46,10 @@ export default function GlobalProvider({ children }) {
     handleClick,
     showSearchBar,
     setShowSearchBar,
+    search,
+    setBySearch,
+    radioSelected,
+    setRadioSelected,
   };
   return (
     <GlobalContext.Provider value={ contextValue }>
@@ -53,5 +59,5 @@ export default function GlobalProvider({ children }) {
 }
 
 GlobalProvider.propTypes = {
-  children: PropTypes.objectOf.isRequired,
+  children: PropTypes.node.isRequired,
 };
