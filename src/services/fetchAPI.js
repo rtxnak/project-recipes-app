@@ -5,10 +5,17 @@ const fetchAPI = async (urlSelected, query) => {
     fetchMealByName: `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`,
 
     fetchMealByFirstLetter: `https://www.themealdb.com/api/json/v1/1/search.php?f=${query}`,
+
+    fetchCocktailByIngredient: `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`,
+
+    fetchCocktailByName: `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`,
+
+    fetchCocktailByFirstLetter: `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${query}`,
   };
 
   if (query.length !== 1
-    && (urlSelected === 'fetchMealByFirstLetter')) {
+    && (urlSelected === 'fetchMealByFirstLetter'
+    || urlSelected === 'fetchCocktailByFirstLetter')) {
     global.alert('Your search must have only 1 (one) character');
   }
   try {
