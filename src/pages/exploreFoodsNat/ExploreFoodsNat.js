@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../../components/footer/Footer';
 import Header from '../../components/header/Header';
 
 function ExploreFoodsNat() {
@@ -8,6 +9,7 @@ function ExploreFoodsNat() {
         label="Explore Nationalities"
         testid="page-title"
       />
+      <Footer />
     </div>
   );
 }
