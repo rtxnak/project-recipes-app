@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import GlobalContext from './GlobalContext';
 import fetchAPI from '../services/fetchAPI';
 
@@ -11,6 +11,7 @@ export default function GlobalProvider({ children }) {
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [search, setBySearch] = useState('');
   const [radioSelected, setRadioSelected] = useState('');
+  const [filterResult, setfilterResult] = useState('');
 
   const validateButton = () => {
     const emailValid = /\S+@\S+\.\S+/.test(email);
@@ -39,34 +40,47 @@ export default function GlobalProvider({ children }) {
   };
 
   const location = useLocation();
+  const history = useHistory();
+
+  const handleSearch = (filterData) => {
+    setfilterResult(filterData);
+    console.log(filterData);
+    // redirect caso encontre somente um resultado.
+    if (location.pathname.includes('foods') && filterData.meals.length === 1) {
+      history.push(`/foods/${filterData.meals[0].idMeal}`);
+    }
+    if (location.pathname.includes('drinks') && filterData.drinks.length === 1) {
+      history.push(`/drinks/${filterData.drinks[0].idDrink}`);
+    }
+  };
 
   const handleSearchClick = () => {
     if (location.pathname === '/foods') {
       if (radioSelected === 'ingredients') {
         fetchAPI('fetchMealByIngredient', search)
-          .then((data) => console.log(data));
+          .then((data) => handleSearch(data));
       }
       if (radioSelected === 'name') {
         fetchAPI('fetchMealByName', search)
-          .then((data) => console.log(data));
+          .then((data) => handleSearch(data));
       }
       if (radioSelected === 'firstLetter') {
         fetchAPI('fetchMealByFirstLetter', search)
-          .then((data) => console.log(data));
+          .then((data) => handleSearch(data));
       }
     }
     if (location.pathname === '/drinks') {
       if (radioSelected === 'ingredients') {
         fetchAPI('fetchCocktailByIngredient', search)
-          .then((data) => console.log(data));
+          .then((data) => handleSearch(data));
       }
       if (radioSelected === 'name') {
         fetchAPI('fetchCocktailByName', search)
-          .then((data) => console.log(data));
+          .then((data) => handleSearch(data));
       }
       if (radioSelected === 'firstLetter') {
         fetchAPI('fetchCocktailByFirstLetter', search)
-          .then((data) => console.log(data));
+          .then((data) => handleSearch(data));
       }
     }
   };
@@ -86,6 +100,7 @@ export default function GlobalProvider({ children }) {
     radioSelected,
     setRadioSelected,
     handleSearchClick,
+    filterResult,
   };
   return (
     <GlobalContext.Provider value={ contextValue }>
