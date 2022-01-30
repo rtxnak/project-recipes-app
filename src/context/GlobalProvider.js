@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useLocation, useHistory } from 'react-router-dom';
 import GlobalContext from './GlobalContext';
 import fetchAPI from '../services/fetchAPI';
+import Card from '../components/card/card';
 
 export default function GlobalProvider({ children }) {
   const [email, setEmail] = useState('');
@@ -85,6 +86,44 @@ export default function GlobalProvider({ children }) {
     }
   };
 
+  const renderFoodRecipes = (arrayOfRecipes) => {
+    console.log(arrayOfRecipes);
+    // const MAX_DRINKS = 12;
+    return (
+      <div>
+        { arrayOfRecipes
+          // .slice(0, MAX_DRINKS)
+          .map((recipe, i) => (
+            <Card
+              key={ recipe.idMeal }
+              index={ i }
+              name={ recipe.strMeal }
+              img={ recipe.strMealThumb }
+              id={ recipe.idMeal }
+            />
+          ))}
+      </div>);
+  };
+
+  const renderDrinkRecipes = (arrayOfRecipes) => {
+    console.log(arrayOfRecipes);
+    const MAX_DRINKS = 12;
+    return (
+      <div>
+        { arrayOfRecipes
+          .slice(0, MAX_DRINKS)
+          .map((recipe, i) => (
+            <Card
+              key={ recipe.idDrink }
+              index={ i }
+              name={ recipe.strDrink }
+              img={ recipe.strDrinkThumb }
+              id={ recipe.idDrink }
+            />
+          ))}
+      </div>);
+  };
+
   const contextValue = {
     handleEmail,
     email,
@@ -101,6 +140,8 @@ export default function GlobalProvider({ children }) {
     setRadioSelected,
     handleSearchClick,
     filterResult,
+    renderFoodRecipes,
+    renderDrinkRecipes,
   };
   return (
     <GlobalContext.Provider value={ contextValue }>
