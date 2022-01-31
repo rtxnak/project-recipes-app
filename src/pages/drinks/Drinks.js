@@ -3,6 +3,7 @@ import Footer from '../../components/footer/Footer';
 import Header from '../../components/header/Header';
 import GlobalContext from '../../context/GlobalContext';
 import fetchAPI from '../../services/fetchAPI';
+import Categories from '../../components/categories/Categories';
 
 export default function Drinks() {
   const {
@@ -31,6 +32,7 @@ export default function Drinks() {
         label="Drinks"
         testid="page-title"
       />
+      <Categories />
       {recipes && renderDrinkRecipes(recipes.drinks)}
       <Footer />
     </div>
