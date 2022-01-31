@@ -12,6 +12,7 @@ const Card = ({ index, img, name }) => (
       data-testid={ `${index}-card-img` }
       src={ img }
       alt="description"
+      width="200px"
     />
   </div>
 );
