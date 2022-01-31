@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Footer from '../../components/footer/Footer';
 import Header from '../../components/header/Header';
 import GlobalContext from '../../context/GlobalContext';
+import fetchAPI from '../../services/fetchAPI';
 
 function Foods() {
   const {
@@ -10,13 +11,28 @@ function Foods() {
   } = useContext(GlobalContext);
   // console.log(filterResult);
 
+  const [recipes, setRecipes] = useState('');
+
+  const mainScreenMeals = async () => {
+    const mainScreenRecipes = await fetchAPI('fetchMealByName', '');
+    setRecipes(mainScreenRecipes);
+  };
+
+  useEffect(() => {
+    mainScreenMeals();
+  }, []);
+
+  useEffect(() => {
+    setRecipes(filterResult);
+  }, [filterResult]);
+
   return (
     <div>
       <Header
         label="Foods"
         testid="page-title"
       />
-      {filterResult && renderFoodRecipes(filterResult.meals)}
+      {recipes && renderFoodRecipes(recipes.meals)}
       <Footer />
     </div>
   );
