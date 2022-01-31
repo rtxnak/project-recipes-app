@@ -43,15 +43,31 @@ export default function GlobalProvider({ children }) {
   const location = useLocation();
   const history = useHistory();
 
-  const handleSearch = (filterData) => {
-    setfilterResult(filterData);
-    console.log(filterData);
-    // redirect caso encontre somente um resultado.
-    if (location.pathname.includes('foods') && filterData.meals.length === 1) {
-      history.push(`/foods/${filterData.meals[0].idMeal}`);
+  const handleSearchMeals = (filterData) => {
+    // console.log(filterData);
+    const alert = 'Sorry, we haven\'t found any recipes for these filters.';
+    if (!filterData.meals) {
+      global.alert(alert);
+    } else {
+      setfilterResult(filterData);
+      // redirect caso encontre somente um resultado.
+      if (location.pathname.includes('foods') && filterData.meals.length === 1) {
+        history.push(`/foods/${filterData.meals[0].idMeal}`);
+      }
     }
-    if (location.pathname.includes('drinks') && filterData.drinks.length === 1) {
-      history.push(`/drinks/${filterData.drinks[0].idDrink}`);
+  };
+
+  const handleSearchCocktails = (filterData) => {
+    // console.log(filterData);
+    const alert = 'Sorry, we haven\'t found any recipes for these filters.';
+    if (!filterData.drinks) {
+      global.alert(alert);
+    } else {
+      setfilterResult(filterData);
+      // redirect caso encontre somente um resultado.
+      if (location.pathname.includes('drinks') && filterData.drinks.length === 1) {
+        history.push(`/drinks/${filterData.drinks[0].idDrink}`);
+      }
     }
   };
 
@@ -59,40 +75,39 @@ export default function GlobalProvider({ children }) {
     if (location.pathname === '/foods') {
       if (radioSelected === 'ingredients') {
         fetchAPI('fetchMealByIngredient', search)
-          .then((data) => handleSearch(data));
+          .then((data) => handleSearchMeals(data));
       }
       if (radioSelected === 'name') {
         fetchAPI('fetchMealByName', search)
-          .then((data) => handleSearch(data));
+          .then((data) => handleSearchMeals(data));
       }
       if (radioSelected === 'firstLetter') {
         fetchAPI('fetchMealByFirstLetter', search)
-          .then((data) => handleSearch(data));
+          .then((data) => handleSearchMeals(data));
       }
     }
     if (location.pathname === '/drinks') {
       if (radioSelected === 'ingredients') {
         fetchAPI('fetchCocktailByIngredient', search)
-          .then((data) => handleSearch(data));
+          .then((data) => handleSearchCocktails(data));
       }
       if (radioSelected === 'name') {
         fetchAPI('fetchCocktailByName', search)
-          .then((data) => handleSearch(data));
+          .then((data) => handleSearchCocktails(data));
       }
       if (radioSelected === 'firstLetter') {
         fetchAPI('fetchCocktailByFirstLetter', search)
-          .then((data) => handleSearch(data));
+          .then((data) => handleSearchCocktails(data));
       }
     }
   };
 
   const renderFoodRecipes = (arrayOfRecipes) => {
-    console.log(arrayOfRecipes);
-    // const MAX_DRINKS = 12;
+    const MAX_MEALS = 12;
     return (
       <div>
         { arrayOfRecipes
-          // .slice(0, MAX_DRINKS)
+          .slice(0, MAX_MEALS)
           .map((recipe, i) => (
             <Card
               key={ recipe.idMeal }
@@ -106,7 +121,7 @@ export default function GlobalProvider({ children }) {
   };
 
   const renderDrinkRecipes = (arrayOfRecipes) => {
-    console.log(arrayOfRecipes);
+    // console.log(arrayOfRecipes);
     const MAX_DRINKS = 12;
     return (
       <div>
