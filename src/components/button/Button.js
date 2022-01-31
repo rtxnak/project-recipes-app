@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 // import GlobalContext from '../../context/GlobalContext';
 
 function Button(props) {
-  const { label, testid, onClick, disabled } = props;
+  const { label, testid, onClick, disabled = false } = props;
   //  const { buttonLogin } = useContext(GlobalContext);
   return (
     <button
