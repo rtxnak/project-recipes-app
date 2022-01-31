@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import Button from '../../components/button/Button';
 import Input from '../../components/input/Input';
 import GlobalContext from '../../context/GlobalContext';
 
-function Login({ history }) {
+function Login() {
+  const history = useHistory();
   const {
     handleEmail,
     email,
@@ -45,9 +46,5 @@ function Login({ history }) {
     </div>
   );
 }
-
-Login.propTypes = {
-  history: PropTypes.node.isRequired,
-};
 
 export default Login;

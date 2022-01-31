@@ -9,9 +9,10 @@ function Profile() {
 
   function fetchEmail() {
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
-    const { email } = user;
-    setEmailLocalStorage(email);
+    if (user) {
+      const { email } = user;
+      setEmailLocalStorage(email);
+    }
   }
 
   useEffect(() => {
@@ -34,6 +35,7 @@ function Profile() {
   return (
     <div>
       <Header label="Profile" testid="page-title" />
+      { console.log(emailLocalStorage) }
       <p data-testid="profile-email">{ emailLocalStorage }</p>
       <button
         type="button"

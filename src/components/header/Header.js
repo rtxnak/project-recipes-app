@@ -42,7 +42,6 @@ function Header(props) {
 
   const handleClickProfile = () => {
     history.push('/profile');
-    console.log(history);
   };
 
   return (
