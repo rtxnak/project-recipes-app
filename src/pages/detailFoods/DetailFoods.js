@@ -3,11 +3,12 @@ import { useLocation } from 'react-router-dom';
 import Button from '../../components/button/Button';
 import fetchAPI from '../../services/fetchAPI';
 
-const FIVE = -5;
+const CUT = '/foods/';
 function DetailFoods() {
   const [returnAPI, setReturnAPI] = useState('');
   const location = useLocation();
-  const sliceLocationId = location.pathname.slice(FIVE);
+  const sliceLocationId = location.pathname.split(CUT)[1];
+  // console.log(location.pathname);
   // console.log(sliceLocationId);
   useEffect(() => {
     const returnFetchApi = async () => {
