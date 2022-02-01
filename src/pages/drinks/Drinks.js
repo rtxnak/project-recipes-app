@@ -25,7 +25,7 @@ export default function Drinks() {
   };
 
   const filterByCategory = async (category) => {
-    if (selectedCategory === category) {
+    if (selectedCategory === category || category === 'all') {
       const mainScreenRecipes = await fetchAPI('fetchCocktailByName', '');
       setfilterResult(mainScreenRecipes);
       setSelectedCategory('');

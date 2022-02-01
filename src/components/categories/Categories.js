@@ -28,6 +28,12 @@ const Categories = ({ onClick }) => {
           disabled={ false }
         />
       ))}
+      <Button
+        label="All"
+        testid="All-category-filter"
+        onClick={ () => onClick('all') }
+        disabled={ false }
+      />
     </div>
   );
 };

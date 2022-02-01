@@ -25,7 +25,7 @@ function Foods() {
   };
 
   const filterByCategory = async (category) => {
-    if (selectedCategory === category) {
+    if (selectedCategory === category || category === 'all') {
       const mainScreenRecipes = await fetchAPI('fetchMealByName', '');
       setfilterResult(mainScreenRecipes);
       setSelectedCategory('');
