@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import Button from '../../components/button/Button';
 import fetchAPI from '../../services/fetchAPI';
+import './DetailFood.css';
 
 const CUT = '/foods/';
 function DetailFoods() {
@@ -25,7 +26,7 @@ function DetailFoods() {
         .map((ingredient) => ingredient[1]))
   );
   console.log(filterIngredients(returnAPI)); */
-
+  const history = useHistory();
   return (
     <div>
       {
@@ -61,6 +62,8 @@ function DetailFoods() {
               testid="start-recipe-btn"
               label="Start Recipe"
               type="button"
+              className="buttonstart"
+              onClick={ () => history.push(`/foods/${sliceLocationId}/in-progress`) }
             />
           </div>
         )

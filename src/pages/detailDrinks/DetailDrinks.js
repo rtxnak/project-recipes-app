@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import Button from '../../components/button/Button';
 import fetchAPI from '../../services/fetchAPI';
+import './DetailDrinks.css';
 
 const CUT = '/drinks/';
 function DetailDrink() {
@@ -10,7 +11,7 @@ function DetailDrink() {
   const sliceLocationId = location.pathname.split(CUT)[1];
 
   // console.log(location.pathname);
-  console.log(sliceLocationId);
+  // console.log(sliceLocationId);
   useEffect(() => {
     const returnFetchApi = async () => {
       const result = await fetchAPI('fetchCocktailById', sliceLocationId);
@@ -18,7 +19,8 @@ function DetailDrink() {
     };
     returnFetchApi();
   }, [sliceLocationId]);
-  console.log(returnAPIDrink);
+  console.log(sliceLocationId);
+  const history = useHistory();
   return (
     <div>
       {
@@ -53,6 +55,8 @@ function DetailDrink() {
             testid="start-recipe-btn"
             label="Start Recipe"
             type="button"
+            className="buttonstart"
+            onClick={ () => history.push(`/drinks/${sliceLocationId}/in-progress`) }
           />
         </div>
       )
