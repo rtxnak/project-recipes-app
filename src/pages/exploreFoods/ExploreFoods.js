@@ -14,6 +14,14 @@ function ExploreFoods() {
     return history.push('/explore/foods/nationalities');
   }
 
+  async function handleFoodSurprise() {
+    const ENDPOINT = 'https://www.themealdb.com/api/json/v1/1/random.php';
+    const promise = await fetch(ENDPOINT);
+    const response = await promise.json();
+    const { idMeal } = response.meals[0];
+    return history.push(`/foods/${idMeal}`);
+  }
+
   return (
     <div>
       <Header
@@ -37,6 +45,7 @@ function ExploreFoods() {
       <button
         type="button"
         data-testid="explore-surprise"
+        onClick={ () => handleFoodSurprise() }
       >
         Surprise me!
       </button>
