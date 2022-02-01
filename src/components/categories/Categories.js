@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import Button from '../button/Button';
 import fetchCategoriesAPI from '../../services/fetchCategoriesAPI';
 
-const Categories = () => {
+const Categories = ({ onClick }) => {
   const [categories, setCategories] = useState([]);
+
   const location = useLocation();
 
   useEffect(() => {
@@ -23,12 +24,16 @@ const Categories = () => {
           key={ i }
           label={ category }
           testid={ `${category}-category-filter` }
-          // onClick
+          onClick={ () => onClick(category) }
           disabled={ false }
         />
       ))}
     </div>
   );
+};
+
+Categories.propTypes = {
+  onClick: PropTypes.func.isRequired,
 };
 
 export default Categories;
