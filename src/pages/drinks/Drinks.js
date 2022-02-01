@@ -17,6 +17,7 @@ export default function Drinks() {
   const location = useLocation();
 
   const [recipes, setRecipes] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   const mainScreenMeals = async () => {
     const mainScreenRecipes = await fetchAPI('fetchCocktailByName', '');
@@ -24,8 +25,15 @@ export default function Drinks() {
   };
 
   const filterByCategory = async (category) => {
-    const responseAPI = await fetchByCategoryAPI(location.pathname, category);
-    setfilterResult(responseAPI);
+    if (selectedCategory === category) {
+      const mainScreenRecipes = await fetchAPI('fetchCocktailByName', '');
+      setfilterResult(mainScreenRecipes);
+      setSelectedCategory('');
+    } else {
+      const responseAPI = await fetchByCategoryAPI(location.pathname, category);
+      setfilterResult(responseAPI);
+      setSelectedCategory(category);
+    }
   };
 
   useEffect(() => {
