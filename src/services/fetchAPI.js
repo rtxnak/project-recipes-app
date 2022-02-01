@@ -11,6 +11,10 @@ const fetchAPI = async (urlSelected, query) => {
     fetchCocktailByName: `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`,
 
     fetchCocktailByFirstLetter: `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${query}`,
+
+    fetchMealById: `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${query}`,
+
+    fetchCocktailById: `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${query}`,
   };
 
   if (query.length !== 1
