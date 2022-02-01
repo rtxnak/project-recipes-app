@@ -8,6 +8,7 @@ function DetailDrink() {
   const [returnAPIDrink, setReturnAPIDrink] = useState('');
   const location = useLocation();
   const sliceLocationId = location.pathname.split(CUT)[1];
+
   // console.log(location.pathname);
   console.log(sliceLocationId);
   useEffect(() => {
