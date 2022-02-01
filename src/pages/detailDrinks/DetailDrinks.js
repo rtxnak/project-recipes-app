@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+import copy from 'clipboard-copy';
+import shareImg from '../../images/shareIcon.svg';
 import Button from '../../components/button/Button';
 import fetchAPI from '../../services/fetchAPI';
 import './DetailDrinks.css';
@@ -21,6 +23,11 @@ function DetailDrink() {
   }, [sliceLocationId]);
   console.log(sliceLocationId);
   const history = useHistory();
+  const [linkCopy, setLinkCopy] = useState(false);
+  const linkC = () => {
+    copy(window.location.href);
+    setLinkCopy(true);
+  };
   return (
     <div>
       {
@@ -37,11 +44,14 @@ function DetailDrink() {
           >
             { returnAPIDrink.drinks[0].strDrink }
           </title>
-          <Button
-            testid="share-btn"
-            label="share"
+          <button
+            data-testid="share-btn"
             type="button"
-          />
+            onClick={ linkC }
+          >
+            <img src={ shareImg } alt="share icon" />
+          </button>
+          {linkCopy ? <p>Link copied!</p> : null}
           <Button
             testid="favorite-btn"
             label="favorite"
