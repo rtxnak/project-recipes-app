@@ -44,7 +44,7 @@ export default function GlobalProvider({ children }) {
   const history = useHistory();
 
   const handleSearchMeals = (filterData) => {
-    // console.log(filterData);
+    // console.log(filterData.meals);
     const alert = 'Sorry, we haven\'t found any recipes for these filters.';
     if (!filterData.meals) {
       global.alert(alert);
@@ -116,7 +116,7 @@ export default function GlobalProvider({ children }) {
               img={ recipe.strMealThumb }
               id={ recipe.idMeal }
             />
-          ))}
+          )) }
       </div>);
   };
 
@@ -135,7 +135,7 @@ export default function GlobalProvider({ children }) {
               img={ recipe.strDrinkThumb }
               id={ recipe.idDrink }
             />
-          ))}
+          )) }
       </div>);
   };
 
