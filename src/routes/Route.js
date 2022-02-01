@@ -9,8 +9,8 @@ function Routes() {
         <Route exact path="/" component={ PGS.Login } />
         <Route exact path="/foods" component={ PGS.Foods } />
         <Route exact path="/drinks" component={ PGS.Drinks } />
-        <Route exact path="/foods/{id-da-receita}" component={ PGS.DetailFoods } />
-        <Route exact path="/drinks/{id-da-receita}" component={ PGS.DetailDrinks } />
+        <Route exact path="/foods/:id" component={ PGS.DetailFoods } />
+        <Route exact path="/drinks/:id" component={ PGS.DetailDrinks } />
         <Route exact path="/foods/:id/in-progress" component={ PGS.ProgressFoods } />
         <Route exact path="/drinks/:id/in-progress" component={ PGS.ProgressDrinks } />
         <Route exact path="/explore" component={ PGS.Explore } />
