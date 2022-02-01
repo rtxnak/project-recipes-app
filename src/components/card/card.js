@@ -4,7 +4,6 @@ import { Link, useLocation } from 'react-router-dom';
 
 const Card = ({ index, img, name, id }) => {
   const location = useLocation();
-  console.log(location);
   return (
     <Link to={ `${location.pathname}/${id}` }>
       <div
@@ -13,7 +12,6 @@ const Card = ({ index, img, name, id }) => {
         <h3 data-testid={ `${index}-card-name` }>
           { name }
         </h3>
-        <p>{ id }</p>
         <img
           data-testid={ `${index}-card-img` }
           src={ img }
