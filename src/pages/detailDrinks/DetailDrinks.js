@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
+import copy from 'clipboard-copy';
+import shareImg from '../../images/shareIcon.svg';
 import Button from '../../components/button/Button';
 import IngredientsList from '../../components/ingredientList/IngredientList';
 import fetchAPI from '../../services/fetchAPI';
+import './DetailDrinks.css';
 
 const CUT = '/drinks/';
 function DetailDrink() {
   const [returnAPIDrink, setReturnAPIDrink] = useState('');
   const location = useLocation();
   const sliceLocationId = location.pathname.split(CUT)[1];
+
   useEffect(() => {
     const returnFetchApi = async () => {
       const result = await fetchAPI('fetchCocktailById', sliceLocationId);
@@ -47,7 +51,12 @@ function DetailDrink() {
     }
   };
 
-  // console.log(returnAPIDrink);
+  const history = useHistory();
+  const [linkCopy, setLinkCopy] = useState(false);
+  const linkC = () => {
+    copy(window.location.href);
+    setLinkCopy(true);
+  };
 
   return (
     <div>
@@ -66,11 +75,14 @@ function DetailDrink() {
           >
             { returnAPIDrink.drinks[0].strDrink }
           </title>
-          <Button
-            testid="share-btn"
-            label="share"
+          <button
+            data-testid="share-btn"
             type="button"
-          />
+            onClick={ linkC }
+          >
+            <img src={ shareImg } alt="share icon" />
+          </button>
+          {linkCopy ? <p>Link copied!</p> : null}
           <Button
             testid="favorite-btn"
             label="favorite"
@@ -104,6 +116,8 @@ function DetailDrink() {
             testid="start-recipe-btn"
             label="Start Recipe"
             type="button"
+            className="buttonstart"
+            onClick={ () => history.push(`/drinks/${sliceLocationId}/in-progress`) }
           />
         </div>
       )

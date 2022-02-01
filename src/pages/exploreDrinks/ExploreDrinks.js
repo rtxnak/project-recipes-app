@@ -10,6 +10,14 @@ function ExploreDrinks() {
     return history.push('/explore/drinks/ingredients');
   }
 
+  async function handleDrinkSurprise() {
+    const ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+    const promise = await fetch(ENDPOINT);
+    const response = await promise.json();
+    const { idDrink } = response.drinks[0];
+    return history.push(`/drinks/${idDrink}`);
+  }
+
   return (
     <div>
       <Header
@@ -26,6 +34,7 @@ function ExploreDrinks() {
       <button
         type="button"
         data-testid="explore-surprise"
+        onClick={ () => handleDrinkSurprise() }
       >
         Surprise me!
       </button>

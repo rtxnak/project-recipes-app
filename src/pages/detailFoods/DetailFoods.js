@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
+import copy from 'clipboard-copy';
+import shareImg from '../../images/shareIcon.svg';
 import Button from '../../components/button/Button';
 import IngredientsList from '../../components/ingredientList/IngredientList';
 import fetchAPI from '../../services/fetchAPI';
+import './DetailFood.css';
 
 const CUT = '/foods/';
 function DetailFoods() {
@@ -42,6 +45,13 @@ function DetailFoods() {
     return `https://www.youtube.com/embed/${youtubeAPISlipted}`;
   };
 
+  const [linkCopy, setLinkCopy] = useState(false);
+  const linkC = () => {
+    copy(window.location.href);
+    setLinkCopy(true);
+  };
+
+  const history = useHistory();
   return (
     <div>
       {
@@ -59,11 +69,14 @@ function DetailFoods() {
             >
               { returnAPI.meals[0].strMeal }
             </title>
-            <Button
-              testid="share-btn"
-              label="share"
+            <button
+              data-testid="share-btn"
               type="button"
-            />
+              onClick={ linkC }
+            >
+              <img src={ shareImg } alt="share icon" />
+            </button>
+            {linkCopy ? <p>Link copied!</p> : null}
             <Button
               testid="favorite-btn"
               label="favorite"
@@ -94,6 +107,8 @@ function DetailFoods() {
               testid="start-recipe-btn"
               label="Start Recipe"
               type="button"
+              className="buttonstart"
+              onClick={ () => history.push(`/foods/${sliceLocationId}/in-progress`) }
             />
           </div>
         )
