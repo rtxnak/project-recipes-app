@@ -19,6 +19,7 @@ function RecomendationCard() {
     }; fetchApiBypathName();
   }, [location.pathname]);
 
+  // console.log(recommendations);
   const SIX = 6;
   const checkPathname = location.pathname.includes('drinks');
   return (
