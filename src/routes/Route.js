@@ -34,6 +34,7 @@ function Routes() {
         <Route exact path="/profile" component={ PGS.Profile } />
         <Route exact path="/done-recipes" component={ PGS.DoneRecipes } />
         <Route exact path="/favorite-recipes" component={ PGS.FavoriteRecipes } />
+        <Route exact path="/explore/drinks/nationalities" component={ PGS.NotFound } />
       </Switch>
     </div>
   );
