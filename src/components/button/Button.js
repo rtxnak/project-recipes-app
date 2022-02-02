@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 // import GlobalContext from '../../context/GlobalContext';
 
 function Button(props) {
-  const { label, testid, onClick, disabled } = props;
-  //  const { buttonLogin } = useContext(GlobalContext);
+  const { label, testid, onClick, disabled = false, className } = props;
   return (
     <button
       type="button"
       data-testid={ testid }
       onClick={ onClick }
       disabled={ disabled }
+      className={ className }
     >
       { label }
     </button>
@@ -22,6 +22,7 @@ Button.propTypes = {
   testid: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,
+  className: PropTypes.string.isRequired,
 };
 
 export default Button;
