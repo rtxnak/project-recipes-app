@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 function Button(props) {
   const { label, testid, onClick, disabled = false, className } = props;
-  //  const { buttonLogin } = useContext(GlobalContext);
   return (
     <button
       type="button"

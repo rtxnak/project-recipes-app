@@ -155,6 +155,7 @@ export default function GlobalProvider({ children }) {
     setRadioSelected,
     handleSearchClick,
     filterResult,
+    setfilterResult,
     renderFoodRecipes,
     renderDrinkRecipes,
   };
