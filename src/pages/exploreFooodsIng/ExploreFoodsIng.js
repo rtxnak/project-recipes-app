@@ -9,6 +9,13 @@ function ExploreFoodsIng() {
         label="Explore Ingredients"
         testid="page-title"
       />
+      <div data-testid={ `${index}-ingredient-card` }>
+        {/* <img
+          data-testid="${index}-card-img"
+          src='ik'
+        />
+        <h3 data-testid="${index}-card-name"/> */}
+      </div>
       <Footer />
     </div>
   );
