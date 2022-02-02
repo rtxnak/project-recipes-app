@@ -61,17 +61,13 @@ function DetailDrink() {
           <span data-testid="$ {index}-ingredient-name-and-measure" />
           <span data-testid="instructions" />
           <span data-testid="$ {index}-recomendation-card" />
-          <button
+          <Button
             testid="start-recipe-btn"
             label="Start Recipe"
             type="button"
-            // className="buttonstart"
-            bottom="0px"
-            position="fixed"
+            className="buttonstart"
             onClick={ () => history.push(`/drinks/${sliceLocationId}/in-progress`) }
-          >
-            Start Recipe
-          </button>
+          />
         </div>
       )
       }

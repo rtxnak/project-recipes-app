@@ -75,7 +75,7 @@ function DetailFoods() {
   useEffect(() => {
     const verifyIdLocalstorage = () => {
       const getRecipeLocalstorage = localStorage.getItem('favoriteRecipes');
-      if (returnAPI && getRecipeLocalstorage.length > 0) {
+      if (returnAPI && getRecipeLocalstorage) {
         const recipeIdLocalstorage = JSON.parse(getRecipeLocalstorage);
         console.log(recipeIdLocalstorage);
         recipeIdLocalstorage.map((value) => returnAPI.meals[0].idMeal === value.id
