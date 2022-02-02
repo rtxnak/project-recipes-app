@@ -13,6 +13,7 @@ import {
   filterMeasuresFunc,
   youtubeLinkConverter,
 } from './FuncDetailDrinks';
+import RecomendationCard from '../../components/recomendationCard/RecomendationCard';
 
 const CUT = '/drinks/';
 function DetailDrink() {
@@ -166,6 +167,7 @@ function DetailDrink() {
               className="buttonstart"
               onClick={ () => history.push(`/drinks/${sliceLocationId}/in-progress`) }
             />
+            <RecomendationCard />
           </div>
         )
       }

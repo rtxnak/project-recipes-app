@@ -6,6 +6,7 @@ import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import Button from '../../components/button/Button';
 import IngredientsList from '../../components/ingredientList/IngredientList';
+import RecomendationCard from '../../components/recomendationCard/RecomendationCard';
 import fetchAPI from '../../services/fetchAPI';
 import './DetailFood.css';
 import {
@@ -146,7 +147,6 @@ function DetailFoods() {
                 title="Embedded youtube"
               />
             </div>
-            <span data-testid="0-recomendation-card" />
             <Button
               testid="start-recipe-btn"
               label="Start Recipe"
@@ -154,6 +154,7 @@ function DetailFoods() {
               className="buttonstart"
               onClick={ () => history.push(`/foods/${sliceLocationId}/in-progress`) }
             />
+            <RecomendationCard />
           </div>
         )
       }
