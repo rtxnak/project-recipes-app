@@ -6,6 +6,7 @@ import Button from '../../components/button/Button';
 import IngredientsList from '../../components/ingredientList/IngredientList';
 import fetchAPI from '../../services/fetchAPI';
 import './DetailFood.css';
+import RecomendationCard from '../../components/recomendationCard/RecomendationCard';
 
 const CUT = '/foods/';
 function DetailFoods() {
@@ -41,7 +42,7 @@ function DetailFoods() {
   const youtubeLinkConverter = () => {
     const youtubeAPI = returnAPI.meals[0].strYoutube;
     const youtubeAPISlipted = youtubeAPI.split('https://www.youtube.com/watch?v=')[1];
-    console.log(youtubeAPISlipted);
+    // console.log(youtubeAPISlipted);
     return `https://www.youtube.com/embed/${youtubeAPISlipted}`;
   };
 
@@ -102,7 +103,6 @@ function DetailFoods() {
                 title="Embedded youtube"
               />
             </div>
-            <span data-testid="0-recomendation-card" />
             <Button
               testid="start-recipe-btn"
               label="Start Recipe"
@@ -110,6 +110,7 @@ function DetailFoods() {
               className="buttonstart"
               onClick={ () => history.push(`/foods/${sliceLocationId}/in-progress`) }
             />
+            <RecomendationCard />
           </div>
         )
       }

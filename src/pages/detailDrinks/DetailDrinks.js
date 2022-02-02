@@ -6,6 +6,7 @@ import Button from '../../components/button/Button';
 import IngredientsList from '../../components/ingredientList/IngredientList';
 import fetchAPI from '../../services/fetchAPI';
 import './DetailDrinks.css';
+import RecomendationCard from '../../components/recomendationCard/RecomendationCard';
 
 const CUT = '/drinks/';
 function DetailDrink() {
@@ -111,7 +112,6 @@ function DetailDrink() {
               />
             </div>
           )}
-          <span data-testid="0-recomendation-card" />
           <Button
             testid="start-recipe-btn"
             label="Start Recipe"
@@ -119,6 +119,7 @@ function DetailDrink() {
             className="buttonstart"
             onClick={ () => history.push(`/drinks/${sliceLocationId}/in-progress`) }
           />
+          <RecomendationCard />
         </div>
       )
       }
