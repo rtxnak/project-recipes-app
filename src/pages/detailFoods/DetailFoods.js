@@ -8,6 +8,10 @@ import Button from '../../components/button/Button';
 import IngredientsList from '../../components/ingredientList/IngredientList';
 import fetchAPI from '../../services/fetchAPI';
 import './DetailFood.css';
+import {
+  filterIngredientsFunc,
+  filterMeasuresFunc,
+  youtubeLinkConverter } from './FuncDetailFoods';
 
 const CUT = '/foods/';
 function DetailFoods() {
@@ -22,31 +26,6 @@ function DetailFoods() {
     returnFetchApi();
   }, [sliceLocationId]);
 
-  const filterIngredientsFunc = () => {
-    if (returnAPI) {
-      const mealsIngredients = Object.entries(returnAPI.meals[0])
-        .filter((key) => key[0].includes('strIngredient') && key[1])
-        .map((e) => e[1]);
-      return mealsIngredients;
-    }
-  };
-
-  const filterMeasuresFunc = () => {
-    if (returnAPI) {
-      const mealsMeasures = Object.entries(returnAPI.meals[0])
-        .filter((key) => key[0].includes('strMeasure') && key[1])
-        .map((e) => e[1]);
-      return mealsMeasures;
-    }
-  };
-
-  const youtubeLinkConverter = () => {
-    const youtubeAPI = returnAPI.meals[0].strYoutube;
-    const youtubeAPISlipted = youtubeAPI.split('https://www.youtube.com/watch?v=')[1];
-    console.log(youtubeAPISlipted);
-    return `https://www.youtube.com/embed/${youtubeAPISlipted}`;
-  };
-
   const [linkCopy, setLinkCopy] = useState(false);
   const linkC = () => {
     copy(window.location.href);
@@ -55,15 +34,6 @@ function DetailFoods() {
 
   const history = useHistory();
   const [favoriteButt, setFavoriteButt] = useState(false);
-  /* const [isFavorite, setIsFavorite] = useState('');
-
-  const checkIsFavorite = () => {
-    const getRecipeLocalstorage = localStorage.getItem('favoriteRecipes');
-    setIsFavorite(getRecipeLocalstorage);
-  };
-  useEffect(() => {
-    checkIsFavorite();
-  }, []); */
 
   const favoriteFood = () => {
     const arrayRecipe = localStorage.getItem('favoriteRecipes');
@@ -92,9 +62,9 @@ function DetailFoods() {
   useEffect(() => {
     const verifyIdLocalstorage = () => {
       const getRecipeLocalstorage = localStorage.getItem('favoriteRecipes');
-      if (returnAPI && getRecipeLocalstorage) {
-        const recipeIdLocalstorage = JSON.parse(getRecipeLocalstorage);
-        console.log(recipeIdLocalstorage);
+      const recipeIdLocalstorage = JSON.parse(getRecipeLocalstorage);
+      if (returnAPI && recipeIdLocalstorage) {
+        // console.log(recipeIdLocalstorage);
         recipeIdLocalstorage.map((value) => returnAPI.meals[0].idMeal === value.id
           && setFavoriteButt(true));
       }
@@ -158,8 +128,8 @@ function DetailFoods() {
               ) }
             <p data-testid="recipe-category">{ returnAPI.meals[0].strCategory }</p>
             <IngredientsList
-              ingredients={ filterIngredientsFunc() }
-              measures={ filterMeasuresFunc() }
+              ingredients={ filterIngredientsFunc(returnAPI) }
+              measures={ filterMeasuresFunc(returnAPI) }
             />
             <div data-testid="instructions">
               { returnAPI.meals[0].strInstructions }
@@ -168,7 +138,7 @@ function DetailFoods() {
               <iframe
                 width="450"
                 height="280"
-                src={ youtubeLinkConverter() }
+                src={ youtubeLinkConverter(returnAPI) }
                 frameBorder="0"
                 allow="accelerometer; autoplay;
                 clipboard-write; encrypted-media; gyroscope; picture-in-picture"
