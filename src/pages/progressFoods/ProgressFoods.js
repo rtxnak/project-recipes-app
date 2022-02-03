@@ -1,36 +1,25 @@
-import React, { useEffect } from 'react';
-// import { useLocation } from 'react-router-dom';
-// import React, { useState, useEffect } from 'react';
-import IngredientsList from '../../components/ingredientList/IngredientList';
-// import fetchAPI from '../../services/fetchAPI';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import fetchAPI from '../../services/fetchAPI';
+import IngredientsCheck from '../../components/IngredientsCheck/IngredientsCheck';
 
-// const CUT = '/foods/';
-function ProgressFoods() {
-  // const [returnAPI] = useState('');
-  // const [recipe, setRecipe] = useState({});
+import {
+  filterIngredientsFunc,
+  filterMeasuresFunc,
+} from '../detailFoods/FuncDetailFoods';
 
-  // const location = useLocation();
-  // const sliLocationId = location.pathname.split(CUT)[1];
-  // // console.log(sliceLocationId);
-  // useEffect(() => {
-  //   const returnFetchApi = async () => {
-  //     const result = await fetchAPI('fetchMealById', sliLocationId);
-  //     setReturnAPI(result);
-  //   };
-  //   returnFetchApi();
-  // }, [sliLocationId]);
+function ProgressFoods({ match }) {
+  const [returnAPI, setReturnAPI] = useState('');
 
-  async function handleFoodSurprise() {
-    const ENDPOINT = 'https://www.themealdb.com/api/json/v1/1/random.php';
-    const promise = await fetch(ENDPOINT);
-    const result = await promise.json();
-    const { idMeal } = result.meals[0];
-    const recipe = { idMeal };
-    console.log(recipe);
-    console.log('returnAPI');
-    return recipe;
-    // return history.push(`/foods/${idMeal}`);
-  }
+  const { params: { id } } = match;
+
+  useEffect(() => {
+    const returnFetchApi = async () => {
+      const result = await fetchAPI('fetchMealById', id);
+      setReturnAPI(result);
+    };
+    returnFetchApi();
+  }, [id]);
 
   // const filterIngredientsFunc = () => {
   //   if (returnAPI) {
@@ -41,29 +30,22 @@ function ProgressFoods() {
   //   }
   // };
 
-  useEffect(() => {
-    handleFoodSurprise();
-    // console.log(recipe);
-    // console.log('returnAPI');
-  }, []);
-
   return (
     <div>
       {
-        // recipe
-        handleFoodSurprise()
+        returnAPI
         && (
           <div>
             <h2>Foods in Progress</h2>
             <img
               data-testid="recipe-photo"
               alt="Img"
-              // src={ recipe.strMealThumb }
+              src={ returnAPI.meals[0].strMealThumb }
               width="200px"
             />
-            {/* <h2 data-testid="recipe-title">{returnAPI.meals[0].strMeal}</h2>
+            <h2 data-testid="recipe-title">{returnAPI.meals[0].strMeal}</h2>
 
-            <h4 data-testid="recipe-category">{returnAPI.meals[0].strCategory}</h4> */}
+            <h4 data-testid="recipe-category">{returnAPI.meals[0].strCategory}</h4>
 
             <button
               type="button"
@@ -79,11 +61,11 @@ function ProgressFoods() {
               Favorite
             </button>
 
-            {/* <p data-testid="instructions">{returnAPI.meals[0].strInstructions}</p> */}
+            <p data-testid="instructions">{returnAPI.meals[0].strInstructions}</p>
 
-            <IngredientsList
-              ingredients={ filterIngredientsFunc() }
-              measures={ filterMeasuresFunc() }
+            <IngredientsCheck
+              ingredients={ filterIngredientsFunc(returnAPI) }
+              measures={ filterMeasuresFunc(returnAPI) }
             />
 
             <button
@@ -98,5 +80,17 @@ function ProgressFoods() {
     </div>
   );
 }
+
+ProgressFoods.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
+};
+
+ProgressFoods.defaultProps = {
+  match: {},
+};
 
 export default ProgressFoods;
