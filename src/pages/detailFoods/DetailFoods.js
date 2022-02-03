@@ -6,8 +6,8 @@ import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import Button from '../../components/button/Button';
 import IngredientsList from '../../components/ingredientList/IngredientList';
-import RecomendationCard from '../../components/recomendationCard/RecomendationCard';
 import fetchAPI from '../../services/fetchAPI';
+import RecomendationCard from '../../components/recomendationCard/RecomendationCard';
 import './DetailFood.css';
 import {
   filterIngredientsFunc,

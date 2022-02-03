@@ -159,7 +159,6 @@ function DetailDrink() {
                 />
               </div>
             ) }
-            <span data-testid="0-recomendation-card" />
             <Button
               testid="start-recipe-btn"
               label="Start Recipe"
