@@ -19,6 +19,5 @@ export const filterMeasuresFunc = (returnAPI) => {
 export const youtubeLinkConverter = (returnAPI) => {
   const youtubeAPI = returnAPI.meals[0].strYoutube;
   const youtubeAPISlipted = youtubeAPI.split('https://www.youtube.com/watch?v=')[1];
-  // console.log(youtubeAPISlipted);
   return `https://www.youtube.com/embed/${youtubeAPISlipted}`;
 };
