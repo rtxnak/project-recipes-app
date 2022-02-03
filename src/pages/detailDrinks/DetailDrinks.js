@@ -28,7 +28,7 @@ function DetailDrink() {
     };
     returnFetchApi();
   }, [sliceLocationId]);
-  console.log(returnAPIDrink);
+  // console.log(returnAPIDrink);
 
   const [linkCopy, setLinkCopy] = useState(false);
   const linkC = () => {
@@ -40,7 +40,7 @@ function DetailDrink() {
 
   const favoriteDrink = () => {
     const arrayRecipe = localStorage.getItem('favoriteRecipes');
-    console.log(arrayRecipe);
+    // console.log(arrayRecipe);
     const {
       idDrink,
       strCategory,
@@ -59,7 +59,7 @@ function DetailDrink() {
     };
     const favoriteRecipes = arrayRecipe
       ? [...JSON.parse(arrayRecipe), newRecipe] : [newRecipe];
-    console.log(newRecipe);
+    // console.log(newRecipe);
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
   };
 

@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import Footer from '../../components/footer/Footer';
 import Header from '../../components/header/Header';
 import IngredientCard from '../../components/ingredientCard/IngredientCard';
 import fetchIngredientsAPI from '../../services/fetchIngredientsAPI';
+import GlobalContext from '../../context/GlobalContext';
 
 function ExploreDrinksIng() {
-  // const history = useHistory();
   const location = useLocation();
-  const [ingredients, setIngredients] = useState([]);
+  const {
+    ingredients,
+    setIngredients,
+  } = useContext(GlobalContext);
 
   useEffect(() => {
     const getIngredientsAPI = async () => {
       const responseAPI = await fetchIngredientsAPI(location.pathname);
       setIngredients(responseAPI);
-      console.log(responseAPI);
     };
     getIngredientsAPI();
   }, [location.pathname]);
