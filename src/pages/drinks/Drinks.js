@@ -12,6 +12,7 @@ export default function Drinks() {
     renderDrinkRecipes,
     filterResult,
     setfilterResult,
+    ingredients,
   } = useContext(GlobalContext);
 
   const location = useLocation();
@@ -37,7 +38,10 @@ export default function Drinks() {
   };
 
   useEffect(() => {
-    mainScreenMeals();
+    if (ingredients.length === 0) {
+      mainScreenMeals();
+    }
+    setRecipes(filterResult);
   }, []);
 
   useEffect(() => {

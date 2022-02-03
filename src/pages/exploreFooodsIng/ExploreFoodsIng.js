@@ -7,7 +7,6 @@ import fetchIngredientsAPI from '../../services/fetchIngredientsAPI';
 import GlobalContext from '../../context/GlobalContext';
 
 function ExploreFoodsIng() {
-  // const history = useHistory();
   const location = useLocation();
   const {
     ingredients,
@@ -18,7 +17,6 @@ function ExploreFoodsIng() {
     const getIngredientsAPI = async () => {
       const responseAPI = await fetchIngredientsAPI(location.pathname);
       setIngredients(responseAPI);
-      console.log(responseAPI);
     };
     getIngredientsAPI();
   }, [location.pathname]);

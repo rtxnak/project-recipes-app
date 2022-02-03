@@ -38,16 +38,14 @@ function Foods() {
   };
 
   useEffect(() => {
-    if (ingredients) {
-      setRecipes(filterResult);
+    if (ingredients.length === 0) {
+      mainScreenMeals();
     }
-    mainScreenMeals();
+    setRecipes(filterResult);
   }, []);
 
   useEffect(() => {
-    if (!ingredients) {
-      setRecipes(filterResult);
-    }
+    setRecipes(filterResult);
   }, [filterResult]);
 
   return (

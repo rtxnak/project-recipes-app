@@ -12,9 +12,7 @@ function IngredientCard(props) {
   } = props;
 
   const {
-    setBySearch,
-    setRadioSelected,
-    handleSearchClick,
+    filterByIngredient,
   } = useContext(GlobalContext);
 
   const location = useLocation();
@@ -24,12 +22,6 @@ function IngredientCard(props) {
       return '/foods';
     }
     return '/drinks';
-  };
-
-  const filterByIngredient = (ingredients) => {
-    setBySearch(ingredients);
-    setRadioSelected('ingredients');
-    return handleSearchClick();
   };
 
   return (
