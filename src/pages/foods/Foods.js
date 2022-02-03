@@ -12,6 +12,7 @@ function Foods() {
     renderFoodRecipes,
     filterResult,
     setfilterResult,
+    ingredients,
   } = useContext(GlobalContext);
 
   const location = useLocation();
@@ -37,11 +38,16 @@ function Foods() {
   };
 
   useEffect(() => {
+    if (ingredients) {
+      setRecipes(filterResult);
+    }
     mainScreenMeals();
   }, []);
 
   useEffect(() => {
-    setRecipes(filterResult);
+    if (!ingredients) {
+      setRecipes(filterResult);
+    }
   }, [filterResult]);
 
   return (

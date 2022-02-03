@@ -13,6 +13,7 @@ export default function GlobalProvider({ children }) {
   const [search, setBySearch] = useState('');
   const [radioSelected, setRadioSelected] = useState('');
   const [filterResult, setfilterResult] = useState('');
+  const [ingredients, setIngredients] = useState([]);
 
   const validateButton = () => {
     const emailValid = /\S+@\S+\.\S+/.test(email);
@@ -72,7 +73,7 @@ export default function GlobalProvider({ children }) {
   };
 
   const handleSearchClick = () => {
-    if (location.pathname === '/foods') {
+    if (location.pathname.includes('foods')) {
       if (radioSelected === 'ingredients') {
         fetchAPI('fetchMealByIngredient', search)
           .then((data) => handleSearchMeals(data));
@@ -86,7 +87,7 @@ export default function GlobalProvider({ children }) {
           .then((data) => handleSearchMeals(data));
       }
     }
-    if (location.pathname === '/drinks') {
+    if (location.pathname.includes('drinks')) {
       if (radioSelected === 'ingredients') {
         fetchAPI('fetchCocktailByIngredient', search)
           .then((data) => handleSearchCocktails(data));
@@ -158,6 +159,8 @@ export default function GlobalProvider({ children }) {
     setfilterResult,
     renderFoodRecipes,
     renderDrinkRecipes,
+    ingredients,
+    setIngredients,
   };
   return (
     <GlobalContext.Provider value={ contextValue }>

@@ -128,13 +128,10 @@ function DetailFoods() {
                 </button>
               ) }
             <p data-testid="recipe-category">{ returnAPI.meals[0].strCategory }</p>
-            <div data-testid="ingredient-step">
-              <IngredientsList
-                ingredients={ filterIngredientsFunc(returnAPI) }
-                measures={ filterMeasuresFunc(returnAPI) }
-              />
-            </div>
-
+            <IngredientsList
+              ingredients={ filterIngredientsFunc(returnAPI) }
+              measures={ filterMeasuresFunc(returnAPI) }
+            />
             <div data-testid="instructions">
               { returnAPI.meals[0].strInstructions }
             </div>
