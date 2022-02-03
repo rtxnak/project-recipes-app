@@ -35,7 +35,6 @@ function Profile() {
   return (
     <div>
       <Header label="Profile" testid="page-title" />
-      {/* { console.log(emailLocalStorage) } */}
       <p data-testid="profile-email">{ emailLocalStorage }</p>
       <button
         type="button"

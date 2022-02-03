@@ -38,7 +38,6 @@ function DetailFoods() {
 
   const favoriteFood = () => {
     const arrayRecipe = localStorage.getItem('favoriteRecipes');
-    console.log(arrayRecipe);
     const { idMeal, strArea, strCategory, strMeal, strMealThumb } = returnAPI.meals[0];
     const newRecipe = {
       id: idMeal,
@@ -51,7 +50,7 @@ function DetailFoods() {
     };
     const favoriteRecipes = arrayRecipe
       ? [...JSON.parse(arrayRecipe), newRecipe] : [newRecipe];
-    console.log(newRecipe);
+
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
   };
 
@@ -65,7 +64,6 @@ function DetailFoods() {
       const getRecipeLocalstorage = localStorage.getItem('favoriteRecipes');
       const recipeIdLocalstorage = JSON.parse(getRecipeLocalstorage);
       if (returnAPI && recipeIdLocalstorage) {
-        // console.log(recipeIdLocalstorage);
         recipeIdLocalstorage.map((value) => returnAPI.meals[0].idMeal === value.id
           && setFavoriteButt(true));
       }
