@@ -138,6 +138,7 @@ export default function GlobalProvider({ children }) {
   };
 
   const filterByIngredient = (ingred) => {
+    // console.log(ingred);
     if (location.pathname.includes('foods')) {
       fetchAPI('fetchMealByIngredient', ingred)
         .then((data) => handleSearchMeals(data));
