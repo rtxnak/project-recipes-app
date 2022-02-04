@@ -7,7 +7,6 @@ import fetchIngredientsAPI from '../../services/fetchIngredientsAPI';
 import GlobalContext from '../../context/GlobalContext';
 
 function ExploreFoodsIng() {
-  // const history = useHistory();
   const location = useLocation();
   const {
     ingredients,
@@ -20,7 +19,7 @@ function ExploreFoodsIng() {
       setIngredients(responseAPI);
     };
     getIngredientsAPI();
-  }, [location.pathname]);
+  }, [location.pathname, setIngredients]);
 
   return (
     <div>

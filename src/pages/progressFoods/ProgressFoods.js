@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import fetchAPI from '../../services/fetchAPI';
 import IngredientsCheck from '../../components/IngredientsCheck/IngredientsCheck';
 
@@ -21,14 +22,10 @@ function ProgressFoods({ match }) {
     returnFetchApi();
   }, [id]);
 
-  // const filterIngredientsFunc = () => {
-  //   if (returnAPI) {
-  //     const mealsIngredients = Object.entries(returnAPI.meals[0])
-  //       .filter((key) => key[0].includes('strIngredient') && key[1])
-  //       .map((e) => e[1]);
-  //     return mealsIngredients;
-  //   }
-  // };
+  const history = useHistory();
+  function redirectFinish() {
+    history.push('/done-recipes');
+  }
 
   return (
     <div>
@@ -71,6 +68,8 @@ function ProgressFoods({ match }) {
             <button
               type="button"
               data-testid="finish-recipe-btn"
+              className="finish-food-btn"
+              onClick={ () => redirectFinish() }
             >
               Finish Recipe
             </button>

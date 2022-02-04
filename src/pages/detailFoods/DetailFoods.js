@@ -50,6 +50,10 @@ function DetailFoods() {
     };
     const favoriteRecipes = arrayRecipe
       ? [...JSON.parse(arrayRecipe), newRecipe] : [newRecipe];
+<<<<<<< HEAD
+=======
+
+>>>>>>> d880f48713b2c81846c1fcd83fac503489d2642e
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
   };
 

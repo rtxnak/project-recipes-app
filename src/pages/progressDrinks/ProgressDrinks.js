@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import fetchAPI from '../../services/fetchAPI';
 import IngredientsCheck from '../../components/IngredientsCheck/IngredientsCheck';
 
@@ -20,6 +21,12 @@ function ProgressDrinks({ match }) {
     };
     returnFetchApi();
   }, [id]);
+
+  const history = useHistory();
+  function redirectFinish() {
+    history.push('/done-recipes');
+  }
+
   return (
     <div>
       {
@@ -61,6 +68,8 @@ function ProgressDrinks({ match }) {
             <button
               type="button"
               data-testid="finish-recipe-btn"
+              className="finish-drink-btn"
+              onClick={ () => redirectFinish() }
             >
               Finish Recipe
             </button>

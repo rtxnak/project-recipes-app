@@ -105,7 +105,7 @@ export default function GlobalProvider({ children }) {
     const MAX_MEALS = 12;
     return (
       <div>
-        { arrayOfRecipes
+        { arrayOfRecipes && arrayOfRecipes
           .slice(0, MAX_MEALS)
           .map((recipe, i) => (
             <Card
@@ -123,7 +123,7 @@ export default function GlobalProvider({ children }) {
     const MAX_DRINKS = 12;
     return (
       <div>
-        { arrayOfRecipes
+        {arrayOfRecipes && arrayOfRecipes
           .slice(0, MAX_DRINKS)
           .map((recipe, i) => (
             <Card
@@ -135,6 +135,18 @@ export default function GlobalProvider({ children }) {
             />
           )) }
       </div>);
+  };
+
+  const filterByIngredient = (ingred) => {
+    // console.log(ingred);
+    if (location.pathname.includes('foods')) {
+      fetchAPI('fetchMealByIngredient', ingred)
+        .then((data) => handleSearchMeals(data));
+    }
+    if (location.pathname.includes('drinks')) {
+      fetchAPI('fetchCocktailByIngredient', ingred)
+        .then((data) => handleSearchCocktails(data));
+    }
   };
 
   const contextValue = {
@@ -158,6 +170,7 @@ export default function GlobalProvider({ children }) {
     renderDrinkRecipes,
     ingredients,
     setIngredients,
+    filterByIngredient,
   };
   return (
     <GlobalContext.Provider value={ contextValue }>
