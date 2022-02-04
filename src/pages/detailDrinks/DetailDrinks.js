@@ -28,10 +28,6 @@ function DetailDrink() {
     };
     returnFetchApi();
   }, [sliceLocationId]);
-<<<<<<< HEAD
-=======
-  // console.log(returnAPIDrink);
->>>>>>> d880f48713b2c81846c1fcd83fac503489d2642e
 
   const [linkCopy, setLinkCopy] = useState(false);
   const linkC = () => {
@@ -43,10 +39,6 @@ function DetailDrink() {
 
   const favoriteDrink = () => {
     const arrayRecipe = localStorage.getItem('favoriteRecipes');
-<<<<<<< HEAD
-=======
-    // console.log(arrayRecipe);
->>>>>>> d880f48713b2c81846c1fcd83fac503489d2642e
     const {
       idDrink,
       strCategory,
@@ -65,10 +57,6 @@ function DetailDrink() {
     };
     const favoriteRecipes = arrayRecipe
       ? [...JSON.parse(arrayRecipe), newRecipe] : [newRecipe];
-<<<<<<< HEAD
-=======
-    // console.log(newRecipe);
->>>>>>> d880f48713b2c81846c1fcd83fac503489d2642e
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
   };
 
