@@ -19,7 +19,7 @@ function ExploreFoodsIng() {
       setIngredients(responseAPI);
     };
     getIngredientsAPI();
-  }, [location.pathname]);
+  }, [location.pathname, setIngredients]);
 
   return (
     <div>
