@@ -14,7 +14,6 @@ function ExploreDrinksIng() {
     const getIngredientsAPI = async () => {
       const responseAPI = await fetchIngredientsAPI(location.pathname);
       setIngredients(responseAPI);
-      console.log(responseAPI);
     };
     getIngredientsAPI();
   }, [location.pathname]);

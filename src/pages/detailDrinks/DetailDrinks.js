@@ -28,7 +28,6 @@ function DetailDrink() {
     };
     returnFetchApi();
   }, [sliceLocationId]);
-  console.log(returnAPIDrink);
 
   const [linkCopy, setLinkCopy] = useState(false);
   const linkC = () => {
@@ -40,7 +39,6 @@ function DetailDrink() {
 
   const favoriteDrink = () => {
     const arrayRecipe = localStorage.getItem('favoriteRecipes');
-    console.log(arrayRecipe);
     const {
       idDrink,
       strCategory,
@@ -59,7 +57,6 @@ function DetailDrink() {
     };
     const favoriteRecipes = arrayRecipe
       ? [...JSON.parse(arrayRecipe), newRecipe] : [newRecipe];
-    console.log(newRecipe);
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
   };
 
@@ -71,9 +68,7 @@ function DetailDrink() {
   useEffect(() => {
     const verifyIdLocalstorage = () => {
       const getRecipeLocalstorage = localStorage.getItem('favoriteRecipes');
-      //  console.log(getRecipeLocalstorage);
       const recipeIdLocalstorage = JSON.parse(getRecipeLocalstorage);
-      console.log(recipeIdLocalstorage);
       if (returnAPIDrink && recipeIdLocalstorage) {
         recipeIdLocalstorage.map((value) => returnAPIDrink.drinks[0].idDrink === value.id
           && setFavoriteButt(true));

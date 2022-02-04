@@ -45,7 +45,6 @@ export default function GlobalProvider({ children }) {
   const history = useHistory();
 
   const handleSearchMeals = (filterData) => {
-    // console.log(filterData.meals);
     const alert = 'Sorry, we haven\'t found any recipes for these filters.';
     if (!filterData.meals) {
       global.alert(alert);
@@ -59,7 +58,6 @@ export default function GlobalProvider({ children }) {
   };
 
   const handleSearchCocktails = (filterData) => {
-    // console.log(filterData);
     const alert = 'Sorry, we haven\'t found any recipes for these filters.';
     if (!filterData.drinks) {
       global.alert(alert);
@@ -122,7 +120,6 @@ export default function GlobalProvider({ children }) {
   };
 
   const renderDrinkRecipes = (arrayOfRecipes) => {
-    // console.log(arrayOfRecipes);
     const MAX_DRINKS = 12;
     return (
       <div>
