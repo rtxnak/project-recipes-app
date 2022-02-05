@@ -21,10 +21,31 @@ function ProgressFoods({ match }) {
     };
     returnFetchApi();
   }, [id]);
+  console.log(returnAPI);
 
   const history = useHistory();
   function redirectFinish() {
     history.push('/done-recipes');
+    const arrayRecipeDone = localStorage.getItem('doneRecipes');
+    const now = new Date();
+    const dataDoneRecipe = `${now.getDate()}/${now.getMonth()}/${now.getFullYear()}`;
+    const { idMeal, strCategory, strMeal, strMealThumb, strTags } = returnAPI.meals[0];
+    console.log(returnAPI.meals[0]);
+    const doneRecipes = {
+      id: idMeal,
+      type: 'food',
+      category: strCategory,
+      alcoholicOrNot: '',
+      name: strMeal,
+      image: strMealThumb,
+      date: dataDoneRecipe,
+      tags: strTags,
+    };
+
+    const doneRecipesLocalstorage = arrayRecipeDone
+      ? [...JSON.parse(arrayRecipeDone), doneRecipes] : [doneRecipes];
+    localStorage.setItem('doneRecipes',
+      JSON.stringify(doneRecipesLocalstorage));
   }
 
   return (
