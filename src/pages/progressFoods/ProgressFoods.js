@@ -29,7 +29,11 @@ function ProgressFoods({ match }) {
     const arrayRecipeDone = localStorage.getItem('doneRecipes');
     const now = new Date();
     const dataDoneRecipe = `${now.getDate()}/${now.getMonth()}/${now.getFullYear()}`;
-    const { idMeal, strCategory, strMeal, strMealThumb, strTags } = returnAPI.meals[0];
+    const {
+      idMeal, strCategory, strMeal, strMealThumb, strTags, strArea,
+    } = returnAPI.meals[0];
+    const tagsArray = strTags.split(',');
+    // console.log(tagsArray);
     console.log(returnAPI.meals[0]);
     const doneRecipes = {
       id: idMeal,
@@ -38,8 +42,9 @@ function ProgressFoods({ match }) {
       alcoholicOrNot: '',
       name: strMeal,
       image: strMealThumb,
-      date: dataDoneRecipe,
-      tags: strTags,
+      doneDate: dataDoneRecipe,
+      tags: tagsArray,
+      nationality: strArea,
     };
 
     const doneRecipesLocalstorage = arrayRecipeDone
