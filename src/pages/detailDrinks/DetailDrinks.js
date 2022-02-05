@@ -1,5 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import {
+  useLocation,
+  useHistory,
+} from 'react-router-dom';
 import copy from 'clipboard-copy';
 import shareImg from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
@@ -7,16 +14,23 @@ import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import Button from '../../components/button/Button';
 import IngredientsList from '../../components/ingredientList/IngredientList';
 import fetchAPI from '../../services/fetchAPI';
+import RecomendationCard from '../../components/recomendationCard/RecomendationCard';
 import './DetailDrinks.css';
 import {
   filterIngredientsFunc,
   filterMeasuresFunc,
   youtubeLinkConverter,
+  favoriteDrink,
+  removeFavoriteDrink,
 } from './FuncDetailDrinks';
-import RecomendationCard from '../../components/recomendationCard/RecomendationCard';
+import GlobalContext from '../../context/GlobalContext';
 
 const CUT = '/drinks/';
 function DetailDrink() {
+  const {
+    handleRecipeStarted,
+  } = useContext(GlobalContext);
+
   const [returnAPIDrink, setReturnAPIDrink] = useState('');
   const location = useLocation();
   const sliceLocationId = location.pathname.split(CUT)[1];
@@ -37,34 +51,6 @@ function DetailDrink() {
   const history = useHistory();
   const [favoriteButt, setFavoriteButt] = useState(false);
 
-  const favoriteDrink = () => {
-    const arrayRecipe = localStorage.getItem('favoriteRecipes');
-    const {
-      idDrink,
-      strCategory,
-      strDrink,
-      strDrinkThumb,
-      strAlcoholic,
-    } = returnAPIDrink.drinks[0];
-    const newRecipe = {
-      id: idDrink,
-      type: 'drink',
-      nationality: '',
-      category: strCategory,
-      alcoholicOrNot: strAlcoholic,
-      name: strDrink,
-      image: strDrinkThumb,
-    };
-    const favoriteRecipes = arrayRecipe
-      ? [...JSON.parse(arrayRecipe), newRecipe] : [newRecipe];
-    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
-  };
-
-  const removeFavoriteDrink = () => {
-    const newRecipe = '';
-    localStorage.setItem('favoriteRecipes', JSON.stringify(...newRecipe, newRecipe));
-  };
-
   useEffect(() => {
     const verifyIdLocalstorage = () => {
       const getRecipeLocalstorage = localStorage.getItem('favoriteRecipes');
@@ -76,6 +62,44 @@ function DetailDrink() {
     };
     verifyIdLocalstorage();
   }, [returnAPIDrink]); // isFavorite
+
+  const startRecipeFunc = (recipe) => {
+    handleRecipeStarted(recipe);
+    history.push(`/drinks/${sliceLocationId}/in-progress`);
+  };
+
+  const continueRecipeFunc = () => {
+    history.push(`/drinks/${sliceLocationId}/in-progress`);
+  };
+
+  const startOrContinueButton = (recipe) => {
+    const getRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    console.log(getRecipes);
+    if (getRecipes) {
+      const checkInProcess = Object.keys(getRecipes.cocktails).includes(recipe.idDrink);
+      if (checkInProcess) {
+        return (
+          <Button
+            testid="start-recipe-btn"
+            label="Continue Recipe"
+            type="button"
+            className="buttonstart"
+            onClick={ () => continueRecipeFunc() }
+          />
+        );
+      }
+    } return (
+      <Button
+        testid="start-recipe-btn"
+        label="Start Recipe"
+        type="button"
+        className="buttonstart"
+        onClick={ () => startRecipeFunc(recipe) }
+      />
+    );
+    // return console.log(recipe);
+  };
+
   return (
     <div>
       {
@@ -106,7 +130,7 @@ function DetailDrink() {
                 <button
                   type="button"
                   onClick={ () => {
-                    favoriteDrink();
+                    favoriteDrink(returnAPIDrink);
                     setFavoriteButt(true);
                   } }
                 >
@@ -154,13 +178,7 @@ function DetailDrink() {
                 />
               </div>
             ) }
-            <Button
-              testid="start-recipe-btn"
-              label="Start Recipe"
-              type="button"
-              className="buttonstart"
-              onClick={ () => history.push(`/drinks/${sliceLocationId}/in-progress`) }
-            />
+            {startOrContinueButton(returnAPIDrink.drinks[0])}
             <RecomendationCard />
           </div>
         )

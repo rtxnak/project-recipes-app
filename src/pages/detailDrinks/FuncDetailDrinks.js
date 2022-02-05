@@ -25,3 +25,31 @@ export const youtubeLinkConverter = (returnAPIDrink) => {
     } return null;
   }
 };
+
+export const favoriteDrink = (returnAPIDrink) => {
+  const arrayRecipe = localStorage.getItem('favoriteRecipes');
+  const {
+    idDrink,
+    strCategory,
+    strDrink,
+    strDrinkThumb,
+    strAlcoholic,
+  } = returnAPIDrink.drinks[0];
+  const newRecipe = {
+    id: idDrink,
+    type: 'drink',
+    nationality: '',
+    category: strCategory,
+    alcoholicOrNot: strAlcoholic,
+    name: strDrink,
+    image: strDrinkThumb,
+  };
+  const favoriteRecipes = arrayRecipe
+    ? [...JSON.parse(arrayRecipe), newRecipe] : [newRecipe];
+  localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+};
+
+export const removeFavoriteDrink = () => {
+  const newRecipe = '';
+  localStorage.setItem('favoriteRecipes', JSON.stringify(...newRecipe, newRecipe));
+};
