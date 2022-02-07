@@ -37,7 +37,7 @@ function Header(props) {
       || label === 'Explore Nationalities'
       || label === 'Drinks') {
       return searchButton();
-    }
+    } setShowSearchBar(false);
   };
 
   const handleClickProfile = () => {

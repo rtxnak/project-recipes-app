@@ -21,3 +21,25 @@ export const youtubeLinkConverter = (returnAPI) => {
   const youtubeAPISlipted = youtubeAPI.split('https://www.youtube.com/watch?v=')[1];
   return `https://www.youtube.com/embed/${youtubeAPISlipted}`;
 };
+
+export const favoriteFood = (returnAPI) => {
+  const arrayRecipe = localStorage.getItem('favoriteRecipes');
+  const { idMeal, strArea, strCategory, strMeal, strMealThumb } = returnAPI.meals[0];
+  const newRecipe = {
+    id: idMeal,
+    type: 'food',
+    nationality: strArea,
+    category: strCategory,
+    alcoholicOrNot: '',
+    name: strMeal,
+    image: strMealThumb,
+  };
+  const favoriteRecipes = arrayRecipe
+    ? [...JSON.parse(arrayRecipe), newRecipe] : [newRecipe];
+  localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+};
+
+export const removeFavoriteFood = () => {
+  const newRecipe = '';
+  localStorage.setItem('favoriteRecipes', JSON.stringify(...newRecipe, newRecipe));
+};

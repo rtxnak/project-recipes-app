@@ -1,4 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import shareImg from '../../images/shareIcon.svg';
@@ -12,13 +16,24 @@ import './DetailFood.css';
 import {
   filterIngredientsFunc,
   filterMeasuresFunc,
-  youtubeLinkConverter } from './FuncDetailFoods';
+  youtubeLinkConverter,
+  favoriteFood,
+  removeFavoriteFood,
+} from './FuncDetailFoods';
+import GlobalContext from '../../context/GlobalContext';
 
 const CUT = '/foods/';
+
 function DetailFoods() {
+  const {
+    handleRecipeStarted,
+  } = useContext(GlobalContext);
+
   const [returnAPI, setReturnAPI] = useState('');
   const location = useLocation();
+  const history = useHistory();
   const sliceLocationId = location.pathname.split(CUT)[1];
+
   useEffect(() => {
     const returnFetchApi = async () => {
       const result = await fetchAPI('fetchMealById', sliceLocationId);
@@ -33,30 +48,7 @@ function DetailFoods() {
     setLinkCopy(true);
   };
 
-  const history = useHistory();
   const [favoriteButt, setFavoriteButt] = useState(false);
-
-  const favoriteFood = () => {
-    const arrayRecipe = localStorage.getItem('favoriteRecipes');
-    const { idMeal, strArea, strCategory, strMeal, strMealThumb } = returnAPI.meals[0];
-    const newRecipe = {
-      id: idMeal,
-      type: 'food',
-      nationality: strArea,
-      category: strCategory,
-      alcoholicOrNot: '',
-      name: strMeal,
-      image: strMealThumb,
-    };
-    const favoriteRecipes = arrayRecipe
-      ? [...JSON.parse(arrayRecipe), newRecipe] : [newRecipe];
-    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
-  };
-
-  const removeFavoriteFood = () => {
-    const newRecipe = '';
-    localStorage.setItem('favoriteRecipes', JSON.stringify(...newRecipe, newRecipe));
-  };
 
   useEffect(() => {
     const verifyIdLocalstorage = () => {
@@ -69,6 +61,43 @@ function DetailFoods() {
     };
     verifyIdLocalstorage();
   }, [returnAPI]); // isFavorite
+
+  const startRecipeFunc = (recipe) => {
+    handleRecipeStarted(recipe);
+    history.push(`/foods/${sliceLocationId}/in-progress`);
+  };
+
+  const continueRecipeFunc = () => {
+    history.push(`/foods/${sliceLocationId}/in-progress`);
+  };
+
+  const startOrContinueButton = (recipe) => {
+    const getRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    console.log(getRecipes);
+    if (getRecipes) {
+      const checkInProcess = Object.keys(getRecipes.meals).includes(recipe.idMeal);
+      if (checkInProcess) {
+        return (
+          <Button
+            testid="start-recipe-btn"
+            label="Continue Recipe"
+            type="button"
+            className="buttonstart"
+            onClick={ () => continueRecipeFunc() }
+          />
+        );
+      }
+    } return (
+      <Button
+        testid="start-recipe-btn"
+        label="Start Recipe"
+        type="button"
+        className="buttonstart"
+        onClick={ () => startRecipeFunc(recipe) }
+      />
+    );
+  };
+
   return (
     <div>
       {
@@ -99,7 +128,7 @@ function DetailFoods() {
                 <button
                   type="button"
                   onClick={ () => {
-                    favoriteFood();
+                    favoriteFood(returnAPI);
                     setFavoriteButt(true);
                   } }
                 >
@@ -144,13 +173,7 @@ function DetailFoods() {
                 title="Embedded youtube"
               />
             </div>
-            <Button
-              testid="start-recipe-btn"
-              label="Start Recipe"
-              type="button"
-              className="buttonstart"
-              onClick={ () => history.push(`/foods/${sliceLocationId}/in-progress`) }
-            />
+            {startOrContinueButton(returnAPI.meals[0])}
             <RecomendationCard />
           </div>
         )

@@ -9,7 +9,7 @@ function DoneRecipes() {
     const getRecipesLocalstorage = () => {
       const dataLocalstorage = localStorage.getItem('doneRecipes');
       const dataLocal = JSON.parse(dataLocalstorage);
-      console.log(dataLocalstorage);
+      // console.log(dataLocalstorage);
       setDoneRecipesLocal(dataLocal);
     };
     getRecipesLocalstorage();
@@ -39,6 +39,7 @@ function DoneRecipes() {
         testid="filter-by-drink-btn"
         label="Drinks"
       />
+      {console.log(doneRecipesLocal)}
       { doneRecipesLocal && (doneRecipesLocal.map((value, index) => (
         <div key={ index }>
           <img
@@ -49,7 +50,8 @@ function DoneRecipes() {
           <h3
             data-testid={ `${index}-horizontal-top-text` }
           >
-            { value.category }
+            {value.type === 'food'
+              ? `${value.nationality} - ${value.category}` : value.alcoholicOrNot }
           </h3>
           <h3
             data-testid={ `${index}-horizontal-name` }
@@ -59,14 +61,17 @@ function DoneRecipes() {
           <h3
             data-testid={ `${index}-horizontal-done-date` }
           >
-            { value.date }
+            { value.doneDate }
           </h3>
-
-          <h3
-            data-testid={ `${index}-${value.tags}-horizontal-tag` }
-          >
-            { value.tags }
-          </h3>
+          { value.tags.length > 1
+            ? value && value.tags.map((tag, i) => (
+              <h3
+                key={ i }
+                data-testid={ `${index}-${tag}-horizontal-tag` }
+              >
+                { tag }
+              </h3>
+            )) : <h3>{value.tags}</h3>}
           <button
             type="button"
           >

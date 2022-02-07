@@ -149,6 +149,34 @@ export default function GlobalProvider({ children }) {
     }
   };
 
+  const handleRecipeStarted = (recipe) => {
+    const getRecipes = JSON.parse(localStorage.getItem('inProgressRecipes')) || {
+      meals: {},
+      cocktails: {},
+    };
+
+    const mealToSave = {
+      ...getRecipes,
+      meals: {
+        ...getRecipes.meals,
+        [recipe.idMeal]: {},
+      },
+    };
+
+    const drinkToSave = {
+      ...getRecipes,
+      cocktails: {
+        ...getRecipes.cocktails,
+        [recipe.idDrink]: {},
+      },
+    };
+    if (location.pathname.includes('food')) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(mealToSave));
+    } else {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(drinkToSave));
+    }
+  };
+
   const contextValue = {
     handleEmail,
     email,
@@ -171,6 +199,7 @@ export default function GlobalProvider({ children }) {
     ingredients,
     setIngredients,
     filterByIngredient,
+    handleRecipeStarted,
   };
   return (
     <GlobalContext.Provider value={ contextValue }>
