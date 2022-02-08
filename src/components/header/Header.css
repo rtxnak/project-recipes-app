@@ -4,10 +4,8 @@
   display: flex;
   justify-content:space-between;
   background-color: #a3a380;
-}
-
-.header {
   font-family: 'Work Sans', sans-serif;
+  align-items: flex-start;
 }
 
 .search-bar{

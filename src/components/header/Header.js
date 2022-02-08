@@ -38,7 +38,7 @@ function Header(props) {
       || label === 'Explore Nationalities'
       || label === 'Drinks') {
       return searchButton();
-    } setShowSearchBar(false);
+    } return setShowSearchBar(false);
   };
 
   const handleClickProfile = () => {
@@ -46,26 +46,30 @@ function Header(props) {
   };
 
   return (
-    <div className="header">
-      <button
-        type="button"
-        onClick={ handleClickProfile }
-      >
-        <img
-          data-testid="profile-top-btn"
-          src={ profileIcon }
-          alt="ProfileIcon"
-        />
-      </button>
-      <header
-        className="header"
-        data-testid={ testid }
-      >
-        <h1>{ label }</h1>
-      </header>
-      <div className="search-bar">
-        { displaySearchButton() }
-        { showSearchBar && <SearchBar /> }
+    <div>
+      <div className="header">
+        <button
+          type="button"
+          onClick={ handleClickProfile }
+        >
+          <img
+            data-testid="profile-top-btn"
+            src={ profileIcon }
+            alt="ProfileIcon"
+          />
+        </button>
+        <header
+          className="header"
+          data-testid={ testid }
+        >
+          <h1>{ label }</h1>
+        </header>
+        <div className="search-bar">
+          { displaySearchButton() }
+        </div>
+      </div>
+      <div>
+        { showSearchBar && (<SearchBar />) }
       </div>
     </div>
   );
