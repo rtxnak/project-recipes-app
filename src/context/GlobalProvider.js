@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation, useHistory } from 'react-router-dom';
+import copy from 'clipboard-copy';
 import GlobalContext from './GlobalContext';
 import fetchAPI from '../services/fetchAPI';
 import Card from '../components/card/card';
@@ -176,6 +177,14 @@ export default function GlobalProvider({ children }) {
     }
   };
 
+  const [linkCopy, setLinkCopy] = useState(false);
+
+  const linkC = () => {
+    const linkForCopy = window.location.href.split('/in-progress')[0];
+    copy(linkForCopy);
+    setLinkCopy(true);
+  };
+
   const contextValue = {
     handleEmail,
     email,
@@ -199,6 +208,8 @@ export default function GlobalProvider({ children }) {
     setIngredients,
     filterByIngredient,
     handleRecipeStarted,
+    linkC,
+    linkCopy,
   };
   return (
     <GlobalContext.Provider value={ contextValue }>

@@ -1,13 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import copy from 'clipboard-copy';
 import fetchAPI from '../../services/fetchAPI';
 import IngredientsCheck from '../../components/IngredientsCheck/IngredientsCheck';
 import GlobalContext from '../../context/GlobalContext';
+import shareImg from '../../images/shareIcon.svg';
+import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
 
 import {
   filterIngredientsFunc,
   filterMeasuresFunc,
+  favoriteDrink,
+  removeFavoriteDrink,
+  verifyIdLocalstorageDrink,
 } from '../detailDrinks/FuncDetailDrinks';
 
 function ProgressDrinks({ match }) {
@@ -66,6 +73,25 @@ function ProgressDrinks({ match }) {
   const finishRecipeIsDisabled = () => Object.values(checkboxList)
     .every((ingredient) => ingredient);
 
+  const [linkCopy, setLinkCopy] = useState(false);
+  const linkC = () => {
+    const linkForCopy = window.location.href.split('/in-progress')[0];
+    copy(linkForCopy);
+    setLinkCopy(true);
+  };
+
+  const [favoriteButt, setFavoriteButt] = useState(false);
+
+  useEffect(() => {
+    const verifyIdLocalstorageValue = async () => {
+      const response = await verifyIdLocalstorageDrink(id);
+      if (response) {
+        setFavoriteButt(true);
+      }
+    };
+    verifyIdLocalstorageValue();
+  }, [returnAPIDrink]); // isFavorite
+
   return (
     <div>
       {
@@ -84,18 +110,44 @@ function ProgressDrinks({ match }) {
             <h4 data-testid="recipe-category">{returnAPIDrink.drinks[0].strAlcoholic}</h4>
 
             <button
-              type="button"
               data-testid="share-btn"
-            >
-              Share
-            </button>
-
-            <button
               type="button"
-              data-testid="favorite-btn"
+              onClick={ linkC }
             >
-              Favorite
+              <img src={ shareImg } alt="share icon" />
             </button>
+            { linkCopy ? <p>Link copied!</p> : null }
+
+            { !favoriteButt
+              ? (
+                <button
+                  type="button"
+                  onClick={ () => {
+                    favoriteDrink(returnAPIDrink);
+                    setFavoriteButt(true);
+                  } }
+                >
+                  <img
+                    data-testid="favorite-btn"
+                    src={ whiteHeartIcon }
+                    alt="whiteHeartIcon"
+                  />
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={ () => {
+                    removeFavoriteDrink();
+                    setFavoriteButt(false);
+                  } }
+                >
+                  <img
+                    data-testid="favorite-btn"
+                    src={ blackHeartIcon }
+                    alt="blackHeartIcon"
+                  />
+                </button>
+              ) }
 
             <p data-testid="instructions">{returnAPIDrink.drinks[0].strInstructions}</p>
 
