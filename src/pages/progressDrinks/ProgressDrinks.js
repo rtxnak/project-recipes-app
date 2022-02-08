@@ -14,8 +14,13 @@ import {
   filterMeasuresFunc,
   favoriteDrink,
   removeFavoriteDrink,
-  verifyIdLocalstorageDrink,
+
 } from '../detailDrinks/FuncDetailDrinks';
+
+import {
+  verifyIdLocalstorageDrink,
+  redirectFinishFunc,
+} from './ProgressDrinksFunc';
 
 function ProgressDrinks({ match }) {
   const [returnAPIDrink, setReturnAPIDrink] = useState('');
@@ -54,8 +59,10 @@ function ProgressDrinks({ match }) {
   }, []);
 
   const history = useHistory();
+
   function redirectFinish() {
     history.push('/done-recipes');
+    redirectFinishFunc(returnAPIDrink);
   }
 
   const handleChangeCheckBox = ({ target }) => {
