@@ -9,7 +9,6 @@ function DoneRecipes() {
     const getRecipesLocalstorage = () => {
       const dataLocalstorage = localStorage.getItem('doneRecipes');
       const dataLocal = JSON.parse(dataLocalstorage);
-      // console.log(dataLocalstorage);
       setDoneRecipesLocal(dataLocal);
     };
     getRecipesLocalstorage();
@@ -39,7 +38,6 @@ function DoneRecipes() {
         testid="filter-by-drink-btn"
         label="Drinks"
       />
-      {console.log(doneRecipesLocal)}
       { doneRecipesLocal && (doneRecipesLocal.map((value, index) => (
         <div key={ index }>
           <img

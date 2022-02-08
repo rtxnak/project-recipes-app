@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import fetchAPI from '../../services/fetchAPI';
 import IngredientsCheck from '../../components/IngredientsCheck/IngredientsCheck';
+import GlobalContext from '../../context/GlobalContext';
 
 import {
   filterIngredientsFunc,
@@ -11,6 +12,10 @@ import {
 
 function ProgressFoods({ match }) {
   const [returnAPI, setReturnAPI] = useState('');
+  const [checkboxList, setCheckboxList] = useState({});
+  const {
+    handleRecipeStarted,
+  } = useContext(GlobalContext);
 
   const { params: { id } } = match;
 
@@ -21,7 +26,25 @@ function ProgressFoods({ match }) {
     };
     returnFetchApi();
   }, [id]);
-  console.log(returnAPI);
+
+  useEffect(() => {
+    const ingredientListCreator = async () => {
+      const result = await fetchAPI('fetchMealById', id);
+      const getRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      const ingredientList = filterIngredientsFunc(result);
+      if (!getRecipes || Object.keys(getRecipes.meals[id]).length === 0) {
+        const state = ingredientList.reduce((obj, ingredient) => ({
+          ...obj,
+          [ingredient]: false,
+        }), {});
+        setCheckboxList(state);
+        handleRecipeStarted(result.meals[0], state);
+      } else {
+        setCheckboxList(getRecipes.meals[id]);
+      }
+    };
+    ingredientListCreator();
+  }, []);
 
   const history = useHistory();
   function redirectFinish() {
@@ -33,8 +56,6 @@ function ProgressFoods({ match }) {
       idMeal, strCategory, strMeal, strMealThumb, strTags, strArea,
     } = returnAPI.meals[0];
     const tagsArray = strTags.split(',');
-    // console.log(tagsArray);
-    console.log(returnAPI.meals[0]);
     const doneRecipes = {
       id: idMeal,
       type: 'food',
@@ -52,6 +73,21 @@ function ProgressFoods({ match }) {
     localStorage.setItem('doneRecipes',
       JSON.stringify(doneRecipesLocalstorage));
   }
+
+  const handleChangeCheckBox = ({ target }) => {
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const getRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const ingredientList = getRecipes.meals[id];
+    const obj = {
+      ...ingredientList,
+      [target.name]: value,
+    };
+    setCheckboxList(obj);
+    handleRecipeStarted(returnAPI.meals[0], obj);
+  };
+
+  const finishRecipeIsDisabled = () => Object.values(checkboxList)
+    .every((ingredient) => ingredient);
 
   return (
     <div>
@@ -86,16 +122,21 @@ function ProgressFoods({ match }) {
 
             <p data-testid="instructions">{returnAPI.meals[0].strInstructions}</p>
 
-            <IngredientsCheck
-              ingredients={ filterIngredientsFunc(returnAPI) }
-              measures={ filterMeasuresFunc(returnAPI) }
-            />
+            {Object.values(checkboxList).length > 0 && (
+              <IngredientsCheck
+                ingredients={ filterIngredientsFunc(returnAPI) }
+                measures={ filterMeasuresFunc(returnAPI) }
+                handleChange={ handleChangeCheckBox }
+                checkboxList={ checkboxList }
+              />
+            )}
 
             <button
               type="button"
               data-testid="finish-recipe-btn"
               className="finish-food-btn"
               onClick={ () => redirectFinish() }
+              disabled={ !finishRecipeIsDisabled() }
             >
               Finish Recipe
             </button>
