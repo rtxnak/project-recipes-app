@@ -1,3 +1,5 @@
+import fetchAPI from '../../services/fetchAPI';
+
 export const filterIngredientsFunc = (returnAPIDrink) => {
   if (returnAPIDrink) {
     const drinksIngredients = Object.entries(returnAPIDrink.drinks[0])
@@ -52,4 +54,14 @@ export const favoriteDrink = (returnAPIDrink) => {
 export const removeFavoriteDrink = () => {
   const newRecipe = '';
   localStorage.setItem('favoriteRecipes', JSON.stringify(...newRecipe, newRecipe));
+};
+
+export const verifyIdLocalstorageDrink = async (id) => {
+  const returnAPIDrink = await fetchAPI('fetchCocktailById', id);
+  const getRecipeLocalstorage = localStorage.getItem('favoriteRecipes');
+  const recipeIdLocalstorage = JSON.parse(getRecipeLocalstorage);
+  if (returnAPIDrink && recipeIdLocalstorage) {
+    recipeIdLocalstorage.map((value) => returnAPIDrink.drinks[0].idDrink === value.id);
+    return true;
+  } return false;
 };
