@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import fetchAPI from '../../services/fetchAPI';
 import IngredientsCheck from '../../components/IngredientsCheck/IngredientsCheck';
+import GlobalContext from '../../context/GlobalContext';
 
 import {
   filterIngredientsFunc,
@@ -11,6 +12,10 @@ import {
 
 function ProgressDrinks({ match }) {
   const [returnAPIDrink, setReturnAPIDrink] = useState('');
+  const [checkboxList, setCheckboxList] = useState({});
+  const {
+    handleRecipeStarted,
+  } = useContext(GlobalContext);
 
   const { params: { id } } = match;
 
@@ -22,10 +27,44 @@ function ProgressDrinks({ match }) {
     returnFetchApi();
   }, [id]);
 
+  useEffect(() => {
+    const ingredientListCreator = async () => {
+      const result = await fetchAPI('fetchCocktailById', id);
+      const getRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      const ingredientList = filterIngredientsFunc(result);
+      if (!getRecipes || Object.keys(getRecipes.cocktails[id]).length === 0) {
+        const state = ingredientList.reduce((obj, ingredient) => ({
+          ...obj,
+          [ingredient]: false,
+        }), {});
+        setCheckboxList(state);
+        handleRecipeStarted(result.drinks[0], state);
+      } else {
+        setCheckboxList(getRecipes.cocktails[id]);
+      }
+    };
+    ingredientListCreator();
+  }, []);
+
   const history = useHistory();
   function redirectFinish() {
     history.push('/done-recipes');
   }
+
+  const handleChangeCheckBox = ({ target }) => {
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const getRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const ingredientList = getRecipes.cocktails[id];
+    const obj = {
+      ...ingredientList,
+      [target.name]: value,
+    };
+    setCheckboxList(obj);
+    handleRecipeStarted(returnAPIDrink.drinks[0], obj);
+  };
+
+  const finishRecipeIsDisabled = () => Object.values(checkboxList)
+    .every((ingredient) => ingredient);
 
   return (
     <div>
@@ -60,16 +99,21 @@ function ProgressDrinks({ match }) {
 
             <p data-testid="instructions">{returnAPIDrink.drinks[0].strInstructions}</p>
 
-            <IngredientsCheck
-              ingredients={ filterIngredientsFunc(returnAPIDrink) }
-              measures={ filterMeasuresFunc(returnAPIDrink) }
-            />
+            {Object.values(checkboxList).length > 0 && (
+              <IngredientsCheck
+                ingredients={ filterIngredientsFunc(returnAPIDrink) }
+                measures={ filterMeasuresFunc(returnAPIDrink) }
+                handleChange={ handleChangeCheckBox }
+                checkboxList={ checkboxList }
+              />
+            )}
 
             <button
               type="button"
               data-testid="finish-recipe-btn"
               className="finish-drink-btn"
               onClick={ () => redirectFinish() }
+              disabled={ !finishRecipeIsDisabled() }
             >
               Finish Recipe
             </button>

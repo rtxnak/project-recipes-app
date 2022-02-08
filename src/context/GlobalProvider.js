@@ -138,7 +138,6 @@ export default function GlobalProvider({ children }) {
   };
 
   const filterByIngredient = (ingred) => {
-    // console.log(ingred);
     if (location.pathname.includes('foods')) {
       fetchAPI('fetchMealByIngredient', ingred)
         .then((data) => handleSearchMeals(data));
@@ -149,7 +148,7 @@ export default function GlobalProvider({ children }) {
     }
   };
 
-  const handleRecipeStarted = (recipe) => {
+  const handleRecipeStarted = (recipe, checkboxList) => {
     const getRecipes = JSON.parse(localStorage.getItem('inProgressRecipes')) || {
       meals: {},
       cocktails: {},
@@ -159,7 +158,7 @@ export default function GlobalProvider({ children }) {
       ...getRecipes,
       meals: {
         ...getRecipes.meals,
-        [recipe.idMeal]: {},
+        [recipe.idMeal]: { ...checkboxList },
       },
     };
 
@@ -167,7 +166,7 @@ export default function GlobalProvider({ children }) {
       ...getRecipes,
       cocktails: {
         ...getRecipes.cocktails,
-        [recipe.idDrink]: {},
+        [recipe.idDrink]: { ...checkboxList },
       },
     };
     if (location.pathname.includes('food')) {
