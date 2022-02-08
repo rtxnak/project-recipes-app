@@ -1,4 +1,9 @@
 .footer {
-  bottom: 0;
-  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  background-color: #a3a380;
+  
 }
+/* bottom: 0;
+  position: fixed; */

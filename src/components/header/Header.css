@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@200&display=swap');
+
+.header {
+  display: flex;
+  justify-content:space-between;
+  background-color: #a3a380;
+}
+
+.header {
+  font-family: 'Work Sans', sans-serif;
+}
+
+.search-bar{
+  display: inline-block;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12px;
+}

@@ -6,6 +6,7 @@ import GlobalContext from '../../context/GlobalContext';
 import fetchAPI from '../../services/fetchAPI';
 import Categories from '../../components/categories/Categories';
 import fetchByCategoryAPI from '../../services/fetchByCategoryAPI';
+import './Foods.css';
 
 function Foods() {
   const {

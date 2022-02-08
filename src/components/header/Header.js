@@ -5,6 +5,7 @@ import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 import GlobalContext from '../../context/GlobalContext';
 import SearchBar from '../searchBar/SearchBar';
+import './Header.css';
 
 function Header(props) {
   const {
@@ -45,7 +46,7 @@ function Header(props) {
   };
 
   return (
-    <div>
+    <div className="header">
       <button
         type="button"
         onClick={ handleClickProfile }
@@ -57,12 +58,15 @@ function Header(props) {
         />
       </button>
       <header
+        className="header"
         data-testid={ testid }
       >
         <h1>{ label }</h1>
       </header>
-      { displaySearchButton() }
-      { showSearchBar && <SearchBar /> }
+      <div className="search-bar">
+        { displaySearchButton() }
+        { showSearchBar && <SearchBar /> }
+      </div>
     </div>
   );
 }

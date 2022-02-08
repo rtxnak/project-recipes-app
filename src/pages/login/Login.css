@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Dancing+Script&display=swap');
+body {
+  background-color: #e9ecef;
+}
+.login-form {
+  width:350px;
+  padding:40px 30px;
+  background:#eee;
+  border-radius:8px;
+  margin:auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top:20%;
+  background-image: url('fundofrutas.jpg');
+}
+
+.elements {
+  align-items: center;
+  margin-left: 70px;
+}
+
+.icon-person {
+  float:left;
+}
+
+.button-enter {
+  width: 60px;
+  margin: 0 auto;
+  margin-left: 70px;
+  padding: 2px;
+}
+
+.login {
+  font-family: 'Dancing Script', cursive;
+  margin-left: 55px;
+}
+
+.false {
+  background-color: #38b000;
+  border-radius: 20px;
+  }
+
+  .true{
+    background-color: rgb(220, 220, 233) ;
+    border-radius: 20px;
+    }
+
+    

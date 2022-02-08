@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import Button from '../button/Button';
 import fetchCategoriesAPI from '../../services/fetchCategoriesAPI';
+import './Categories.css';
 
 const Categories = ({ onClick }) => {
   const [categories, setCategories] = useState([]);
@@ -18,7 +19,7 @@ const Categories = ({ onClick }) => {
   }, [location.pathname]);
 
   return (
-    <div>
+    <div className="button-foods">
       {categories && categories.map((category, i) => (
         <Button
           key={ i }
