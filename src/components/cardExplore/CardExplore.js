@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import './CardExplore.css';
 
 const CardExplore = ({ index, img, name, id }) => (
   <Link to={ `/foods/${id}` }>

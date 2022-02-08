@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
 import GlobalContext from '../../context/GlobalContext';
+import './IngredientCard.css';
 
 function IngredientCard(props) {
   const {
@@ -32,18 +33,21 @@ function IngredientCard(props) {
       } }
     >
       <div
+        className="ingredientCard"
         data-testid={ `${index}-ingredient-card` }
       >
-        <img
-          src={ src }
-          data-testid={ `${index}-card-img` }
-          alt={ alt }
-        />
-        <h3
-          data-testid={ `${index}-card-name` }
-        >
-          { label }
-        </h3>
+        <div>
+          <img
+            src={ src }
+            data-testid={ `${index}-card-img` }
+            alt={ alt }
+          />
+          <h3
+            data-testid={ `${index}-card-name` }
+          >
+            { label }
+          </h3>
+        </div>
       </div>
     </Link>
   );

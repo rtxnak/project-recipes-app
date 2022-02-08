@@ -5,6 +5,7 @@ import Header from '../../components/header/Header';
 import IngredientCard from '../../components/ingredientCard/IngredientCard';
 import fetchIngredientsAPI from '../../services/fetchIngredientsAPI';
 import GlobalContext from '../../context/GlobalContext';
+import './ExploreFoodIng.css';
 
 function ExploreFoodsIng() {
   const location = useLocation();
