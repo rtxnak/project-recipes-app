@@ -64,7 +64,7 @@ function DetailDrink() {
   }, [returnAPIDrink]); // isFavorite
 
   const startRecipeFunc = (recipe) => {
-    handleRecipeStarted(recipe);
+    handleRecipeStarted(recipe, '');
     history.push(`/drinks/${sliceLocationId}/in-progress`);
   };
 
@@ -74,7 +74,6 @@ function DetailDrink() {
 
   const startOrContinueButton = (recipe) => {
     const getRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    console.log(getRecipes);
     if (getRecipes) {
       const checkInProcess = Object.keys(getRecipes.cocktails).includes(recipe.idDrink);
       if (checkInProcess) {
@@ -97,7 +96,6 @@ function DetailDrink() {
         onClick={ () => startRecipeFunc(recipe) }
       />
     );
-    // return console.log(recipe);
   };
 
   return (
@@ -144,7 +142,7 @@ function DetailDrink() {
                 <button
                   type="button"
                   onClick={ () => {
-                    removeFavoriteDrink();
+                    removeFavoriteDrink(sliceLocationId);
                     setFavoriteButt(false);
                   } }
                 >

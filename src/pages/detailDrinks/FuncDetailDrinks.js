@@ -49,7 +49,8 @@ export const favoriteDrink = (returnAPIDrink) => {
   localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
 };
 
-export const removeFavoriteDrink = () => {
-  const newRecipe = '';
-  localStorage.setItem('favoriteRecipes', JSON.stringify(...newRecipe, newRecipe));
+export const removeFavoriteDrink = (id) => {
+  const arrayRecipe = localStorage.getItem('favoriteRecipes');
+  const newArray = JSON.parse(arrayRecipe).filter((filtered) => filtered.id !== id);
+  localStorage.setItem('favoriteRecipes', JSON.stringify(newArray));
 };
