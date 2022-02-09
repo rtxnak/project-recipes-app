@@ -10,6 +10,7 @@ import blackHeartIcon from '../../images/blackHeartIcon.svg';
 function FavoriteRecipes() {
   const [favRecipes, setFavRecipes] = useState('');
   const [remove, setRemove] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   useEffect(() => {
     const getFavoriteRecipe = () => {
@@ -39,76 +40,109 @@ function FavoriteRecipes() {
     const newArray = JSON.parse(arrayRecipe).filter((filtered) => filtered.id !== id);
     localStorage.setItem('favoriteRecipes', JSON.stringify(newArray));
   };
+
+  const filterByCategory = (category) => {
+    console.log(category);
+    setSelectedCategory(category);
+  };
+
   return (
     <div>
       <Header
         label="Favorite Recipes"
         testid="page-title"
       />
-      { favRecipes && console.log(favRecipes) }
-      { favRecipes && favRecipes.map((recipe, i) => (
-        recipe.type === 'food' ? (
-          <div key={ i }>
-            <CardFavoriteFood
-              recipe={ recipe }
-            />
-            <button
-              type="button"
-              onClick={ () => linkC(recipe) }
-            >
-              <img
-                data-testid={ `${i}-horizontal-share-btn` }
-                src={ shareIcon }
-                alt="share icon"
+      <button
+        type="button"
+        data-testid="filter-by-all-btn"
+        name=""
+        onClick={ ({ target: { name } }) => filterByCategory(name) }
+      >
+        All
+      </button>
+      <button
+        type="button"
+        data-testid="filter-by-food-btn"
+        name="food"
+        onClick={ ({ target: { name } }) => filterByCategory(name) }
+      >
+        Food
+      </button>
+      <button
+        type="button"
+        data-testid="filter-by-drink-btn"
+        name="drink"
+        onClick={ ({ target: { name } }) => filterByCategory(name) }
+      >
+        Drinks
+      </button>
+      { favRecipes && favRecipes
+        .filter((recipe) => (recipe.type.includes(selectedCategory)))
+        .map((recipe, i) => (
+          recipe.type === 'food' ? (
+            <div key={ i }>
+              <CardFavoriteFood
+                recipe={ recipe }
+                index={ i }
               />
-            </button>
-            { linkCopy ? <p>Link copied!</p> : null }
-            <button
-              type="button"
-              onClick={ () => {
-                removeFavorite(recipe.id);
-                setRemove(!remove);
-              } }
-            >
-              <img
-                data-testid="favorite-btn"
-                src={ blackHeartIcon }
-                alt="blackHeartIcon"
+              <button
+                type="button"
+                onClick={ () => linkC(recipe) }
+              >
+                <img
+                  data-testid={ `${i}-horizontal-share-btn` }
+                  src={ shareIcon }
+                  alt="share icon"
+                />
+              </button>
+              { linkCopy ? <p>Link copied!</p> : null }
+              <button
+                type="button"
+                onClick={ () => {
+                  removeFavorite(recipe.id);
+                  setRemove(!remove);
+                } }
+              >
+                <img
+                  data-testid={ `${i}-horizontal-favorite-btn` }
+                  src={ blackHeartIcon }
+                  alt="blackHeartIcon"
+                />
+              </button>
+            </div>
+          ) : (
+            <div key={ i }>
+              <CardFavoriteDrink
+                recipe={ recipe }
+                index={ i }
               />
-            </button>
-          </div>
-        ) : (
-          <div key={ i }>
-            <CardFavoriteDrink
-              recipe={ recipe }
-            />
-            <button
-              type="button"
-              onClick={ () => linkC(recipe) }
-            >
-              <img
-                data-testid={ `${i}-horizontal-share-btn` }
-                src={ shareIcon }
-                alt="share icon"
-              />
-            </button>
-            { linkCopy ? <p>Link copied!</p> : null }
-            <button
-              type="button"
-              onClick={ () => {
-                removeFavorite(recipe.id);
-                setRemove(!remove);
-              } }
-            >
-              <img
-                data-testid="favorite-btn"
-                src={ blackHeartIcon }
-                alt="blackHeartIcon"
-              />
-            </button>
-          </div>
-        )
-      ))}
+              <button
+                type="button"
+                onClick={ () => linkC(recipe) }
+              >
+                <img
+                  data-testid={ `${i}-horizontal-share-btn` }
+                  src={ shareIcon }
+                  alt="share icon"
+                />
+              </button>
+              { linkCopy ? <p>Link copied!</p> : null }
+              <button
+                type="button"
+                onClick={ () => {
+                  removeFavorite(recipe.id);
+                  setRemove(!remove);
+                } }
+              >
+                <img
+                  data-testid={ `${i}-horizontal-favorite-btn` }
+                  src={ blackHeartIcon }
+                  alt="blackHeartIcon"
+                />
+              </button>
+            </div>
+          )
+        ))}
     </div>
   );
 }
