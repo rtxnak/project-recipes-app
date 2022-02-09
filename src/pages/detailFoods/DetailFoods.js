@@ -63,7 +63,7 @@ function DetailFoods() {
   }, [returnAPI]); // isFavorite
 
   const startRecipeFunc = (recipe) => {
-    handleRecipeStarted(recipe);
+    handleRecipeStarted(recipe, '');
     history.push(`/foods/${sliceLocationId}/in-progress`);
   };
 
@@ -73,7 +73,6 @@ function DetailFoods() {
 
   const startOrContinueButton = (recipe) => {
     const getRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    console.log(getRecipes);
     if (getRecipes) {
       const checkInProcess = Object.keys(getRecipes.meals).includes(recipe.idMeal);
       if (checkInProcess) {

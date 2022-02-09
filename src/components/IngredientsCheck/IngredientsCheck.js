@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 
-function IngredientsCheck({ ingredients, measures }) {
+function IngredientsCheck({ ingredients, measures, handleChange, checkboxList }) {
   return (
     <div>
       <h3>Ingredients</h3>
@@ -14,7 +14,9 @@ function IngredientsCheck({ ingredients, measures }) {
             {`${ingredient} - ${measures[i]}`}
             <input
               type="checkbox"
-              name="ingredient"
+              name={ ingredient }
+              onChange={ handleChange }
+              checked={ Object.values(checkboxList)[i] }
             />
           </li>
         )) }
@@ -26,6 +28,8 @@ function IngredientsCheck({ ingredients, measures }) {
 IngredientsCheck.propTypes = {
   ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
   measures: PropTypes.arrayOf(PropTypes.string).isRequired,
+  handleChange: PropTypes.func.isRequired,
+  checkboxList: PropTypes.objectOf(string).isRequired,
 };
 
 export default IngredientsCheck;
