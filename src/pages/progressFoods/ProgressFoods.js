@@ -87,7 +87,7 @@ function ProgressFoods({ match }) {
       }
     };
     verifyIdLocalstorageValue();
-  }, [returnAPI]);
+  }, []);
 
   return (
     <div>
@@ -134,7 +134,7 @@ function ProgressFoods({ match }) {
                 <button
                   type="button"
                   onClick={ () => {
-                    removeFavoriteFood();
+                    removeFavoriteFood(id);
                     setFavoriteButt(false);
                   } }
                 >

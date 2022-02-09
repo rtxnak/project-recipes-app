@@ -4,9 +4,12 @@ import CardFavoriteDrink from '../../components/cardFavorite/CardFavoriteDrink';
 import CardFavoriteFood from '../../components/cardFavorite/CardFavoriteFood';
 import Header from '../../components/header/Header';
 import shareIcon from '../../images/shareIcon.svg';
+// import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
 
 function FavoriteRecipes() {
   const [favRecipes, setFavRecipes] = useState('');
+  const [remove, setRemove] = useState(false);
 
   useEffect(() => {
     const getFavoriteRecipe = () => {
@@ -15,7 +18,7 @@ function FavoriteRecipes() {
       setFavRecipes(arrFavoriteRecipes);
     };
     getFavoriteRecipe();
-  }, []);
+  }, [remove]);
 
   const [linkCopy, setLinkCopy] = useState(false);
   const linkC = (value) => {
@@ -31,12 +34,18 @@ function FavoriteRecipes() {
     }
   };
 
+  const removeFavorite = (id) => {
+    const arrayRecipe = localStorage.getItem('favoriteRecipes');
+    const newArray = JSON.parse(arrayRecipe).filter((filtered) => filtered.id !== id);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newArray));
+  };
   return (
     <div>
       <Header
         label="Favorite Recipes"
         testid="page-title"
       />
+      { favRecipes && console.log(favRecipes) }
       { favRecipes && favRecipes.map((recipe, i) => (
         recipe.type === 'food' ? (
           <div key={ i }>
@@ -54,6 +63,19 @@ function FavoriteRecipes() {
               />
             </button>
             { linkCopy ? <p>Link copied!</p> : null }
+            <button
+              type="button"
+              onClick={ () => {
+                removeFavorite(recipe.id);
+                setRemove(!remove);
+              } }
+            >
+              <img
+                data-testid="favorite-btn"
+                src={ blackHeartIcon }
+                alt="blackHeartIcon"
+              />
+            </button>
           </div>
         ) : (
           <div key={ i }>
@@ -71,6 +93,19 @@ function FavoriteRecipes() {
               />
             </button>
             { linkCopy ? <p>Link copied!</p> : null }
+            <button
+              type="button"
+              onClick={ () => {
+                removeFavorite(recipe.id);
+                setRemove(!remove);
+              } }
+            >
+              <img
+                data-testid="favorite-btn"
+                src={ blackHeartIcon }
+                alt="blackHeartIcon"
+              />
+            </button>
           </div>
         )
       ))}

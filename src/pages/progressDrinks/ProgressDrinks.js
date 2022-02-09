@@ -97,7 +97,7 @@ function ProgressDrinks({ match }) {
       }
     };
     verifyIdLocalstorageValue();
-  }, [returnAPIDrink]); // isFavorite
+  }, []); // isFavorite
 
   return (
     <div>
@@ -144,7 +144,7 @@ function ProgressDrinks({ match }) {
                 <button
                   type="button"
                   onClick={ () => {
-                    removeFavoriteDrink();
+                    removeFavoriteDrink(id);
                     setFavoriteButt(false);
                   } }
                 >

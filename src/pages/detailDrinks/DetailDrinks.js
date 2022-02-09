@@ -142,7 +142,7 @@ function DetailDrink() {
                 <button
                   type="button"
                   onClick={ () => {
-                    removeFavoriteDrink();
+                    removeFavoriteDrink(sliceLocationId);
                     setFavoriteButt(false);
                   } }
                 >

@@ -141,7 +141,7 @@ function DetailFoods() {
                 <button
                   type="button"
                   onClick={ () => {
-                    removeFavoriteFood();
+                    removeFavoriteFood(sliceLocationId);
                     setFavoriteButt(false);
                   } }
                 >
