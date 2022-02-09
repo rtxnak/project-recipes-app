@@ -22,6 +22,7 @@ function Header(props) {
 
   const searchButton = () => (
     <button
+      className="button-seach"
       type="button"
       onClick={ () => setShowSearchBar(!showSearchBar) }
     >
@@ -49,6 +50,7 @@ function Header(props) {
     <div>
       <div className="header">
         <button
+          className="button-profile"
           type="button"
           onClick={ handleClickProfile }
         >
@@ -64,7 +66,7 @@ function Header(props) {
         >
           <h1>{ label }</h1>
         </header>
-        <div className="search-bar">
+        <div>
           { displaySearchButton() }
         </div>
       </div>

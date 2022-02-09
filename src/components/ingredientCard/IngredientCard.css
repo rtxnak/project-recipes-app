@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Dancing+Script&family=Roboto+Mono:wght@200&family=Supermercado+One&display=swap');
 
-.card {
+.ingredient-card {
   border: 2px solid grey;
   border-radius: 5px;
   box-sizing: border-box;
@@ -9,10 +9,9 @@
   flex-direction: column;
   justify-content: space-between;
   height: auto;
-  width: 180px;
+  width: 100px;
   margin-top: 20px;
   margin-right: 5px;
   margin-left: 5px;
   font-family: 'Roboto Mono', monospace;
-  box-shadow: 5px 3px 3px gray;
 }

@@ -6,10 +6,17 @@
   background-color: #a3a380;
   font-family: 'Work Sans', sans-serif;
   align-items: flex-start;
+  height: 60px;
 }
 
-.search-bar{
-  display: inline-block;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 12px;
+.button-profile {
+  height: 57px;
+  margin-top: 2px;
+  margin-left: 2px;
+}
+
+.button-seach {
+  height: 57px;
+  margin-top: 2px;
+  margin-right: 2px;
 }

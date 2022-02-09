@@ -27,15 +27,17 @@ function ExploreFoodsIng() {
         label="Explore Ingredients"
         testid="page-title"
       />
-      {ingredients && ingredients.map((ingredient, i) => (
-        <IngredientCard
-          key={ i }
-          src={ `https://www.themealdb.com/images/ingredients/${ingredient}-Small.png` }
-          index={ i }
-          alt={ ingredient }
-          label={ ingredient }
-        />
-      ))}
+      <div>
+        { ingredients && ingredients.map((ingredient, i) => (
+          <IngredientCard
+            key={ i }
+            src={ `https://www.themealdb.com/images/ingredients/${ingredient}-Small.png` }
+            index={ i }
+            alt={ ingredient }
+            label={ ingredient }
+          />
+        )) }
+      </div>
       <Footer />
     </div>
   );

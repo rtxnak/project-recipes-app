@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Footer from '../../components/footer/Footer';
 import Header from '../../components/header/Header';
+import './Profile.css';
 
 function Profile() {
   const [emailLocalStorage, setEmailLocalStorage] = useState('');
@@ -36,27 +37,29 @@ function Profile() {
     <div>
       <Header label="Profile" testid="page-title" />
       <p data-testid="profile-email">{ emailLocalStorage }</p>
-      <button
-        type="button"
-        data-testid="profile-done-btn"
-        onClick={ handleClickDone }
-      >
-        Done Recipes
-      </button>
-      <button
-        type="button"
-        data-testid="profile-favorite-btn"
-        onClick={ handleClickFavorite }
-      >
-        Favorite Recipes
-      </button>
-      <button
-        type="button"
-        data-testid="profile-logout-btn"
-        onClick={ handleClickLogout }
-      >
-        Logout
-      </button>
+      <div className="button-profile">
+        <button
+          type="button"
+          data-testid="profile-done-btn"
+          onClick={ handleClickDone }
+        >
+          Done Recipes
+        </button>
+        <button
+          type="button"
+          data-testid="profile-favorite-btn"
+          onClick={ handleClickFavorite }
+        >
+          Favorite Recipes
+        </button>
+        <button
+          type="button"
+          data-testid="profile-logout-btn"
+          onClick={ handleClickLogout }
+        >
+          Logout
+        </button>
+      </div>
       <Footer />
     </div>
   );

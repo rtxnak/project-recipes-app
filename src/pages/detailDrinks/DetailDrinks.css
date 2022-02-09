@@ -1,4 +1,33 @@
 .buttonstart {
   bottom: 0;
   position: fixed;
+  width: 100%;
+  background-color: #80B918;
+  height: 35px;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.image-recipe {
+  width: 400px;
+}
+
+.category-share-fav {
+ display: inline-block
+}
+
+.share {
+  width: 25px;
+}
+
+.heart {
+  width: 25px;
+}
+
+.instructions:hover {
+  background-color: #C2C5AA;
+}
+
+.instructions {
+  margin-bottom: 40px;
 }

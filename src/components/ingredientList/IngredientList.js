@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './IngredientList.css';
 
 function IngredientsList({ ingredients, measures }) {
   return (
@@ -8,6 +9,7 @@ function IngredientsList({ ingredients, measures }) {
       <ul>
         { ingredients.map((ingredient, i) => (
           <li
+            className="ingredient-list"
             data-testid={ `${i}-ingredient-name-and-measure` }
             key={ i }
           >

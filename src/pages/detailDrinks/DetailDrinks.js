@@ -105,60 +105,72 @@ function DetailDrink() {
         && (
           <div>
             <img
+              className="image-recipe"
               data-testid="recipe-photo"
               src={ returnAPIDrink.drinks[0].strDrinkThumb }
               alt="img"
               width="200px"
             />
-            <title
-              data-testid="recipe-title"
-            >
-              { returnAPIDrink.drinks[0].strDrink }
-            </title>
-            <button
-              data-testid="share-btn"
-              type="button"
-              onClick={ linkC }
-            >
-              <img src={ shareImg } alt="share icon" />
-            </button>
-            { linkCopy ? <p>Link copied!</p> : null }
-            { !favoriteButt
-              ? (
-                <button
-                  type="button"
-                  onClick={ () => {
-                    favoriteDrink(returnAPIDrink);
-                    setFavoriteButt(true);
-                  } }
-                >
-                  <img
-                    data-testid="favorite-btn"
-                    src={ whiteHeartIcon }
-                    alt="whiteHeartIcon"
-                  />
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={ () => {
-                    removeFavoriteDrink(sliceLocationId);
-                    setFavoriteButt(false);
-                  } }
-                >
-                  <img
-                    data-testid="favorite-btn"
-                    src={ blackHeartIcon }
-                    alt="blackHeartIcon"
-                  />
-                </button>
-              ) }
-            <p data-testid="recipe-category">{ returnAPIDrink.drinks[0].strAlcoholic }</p>
+            <div className="category-share-fav">
+              <title
+                data-testid="recipe-title"
+              >
+                { returnAPIDrink.drinks[0].strDrink }
+              </title>
+              <button
+                data-testid="share-btn"
+                type="button"
+                onClick={ linkC }
+              >
+                <img className="share" src={ shareImg } alt="share icon" />
+              </button>
+              { linkCopy ? <p>Link copied!</p> : null }
+              { !favoriteButt
+                ? (
+                  <button
+                    type="button"
+                    onClick={ () => {
+                      favoriteDrink(returnAPIDrink);
+                      setFavoriteButt(true);
+                    } }
+                  >
+                    <img
+                      className="heart"
+                      data-testid="favorite-btn"
+                      src={ whiteHeartIcon }
+                      alt="whiteHeartIcon"
+                    />
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={ () => {
+                      removeFavoriteDrink(removeFavoriteDrink);
+                      setFavoriteButt(false);
+                    } }
+                  >
+                    <img
+                      className="heart"
+                      data-testid="favorite-btn"
+                      src={ blackHeartIcon }
+                      alt="blackHeartIcon"
+                    />
+                  </button>
+                ) }
+              <p
+                data-testid="recipe-category"
+              >
+                { ` Alcoholic or not: ${returnAPIDrink.drinks[0].strAlcoholic}`}
+              </p>
+            </div>
             <IngredientsList
               ingredients={ filterIngredientsFunc(returnAPIDrink) }
               measures={ filterMeasuresFunc(returnAPIDrink) }
             />
-            <div data-testid="instructions">
+            <div
+              data-testid="instructions"
+              className="instructions"
+            >
               { returnAPIDrink.drinks[0].strInstructions }
             </div>
             { youtubeLinkConverter && (
@@ -176,7 +188,7 @@ function DetailDrink() {
                 />
               </div>
             ) }
-            {startOrContinueButton(returnAPIDrink.drinks[0])}
+            { startOrContinueButton(returnAPIDrink.drinks[0]) }
             <RecomendationCard />
           </div>
         )

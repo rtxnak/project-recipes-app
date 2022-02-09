@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
 import GlobalContext from '../../context/GlobalContext';
+import './IngredientCard.css';
 
 function IngredientCard(props) {
   const {
@@ -25,27 +26,29 @@ function IngredientCard(props) {
   };
 
   return (
-    <Link
-      to={ () => redirectByPathname() }
-      onClick={ () => {
-        filterByIngredient(label);
-      } }
-    >
-      <div
-        data-testid={ `${index}-ingredient-card` }
+    <div className="ingredient-card">
+      <Link
+        to={ () => redirectByPathname() }
+        onClick={ () => {
+          filterByIngredient(label);
+        } }
       >
-        <img
-          src={ src }
-          data-testid={ `${index}-card-img` }
-          alt={ alt }
-        />
-        <h3
-          data-testid={ `${index}-card-name` }
+        <div
+          data-testid={ `${index}-ingredient-card` }
         >
-          { label }
-        </h3>
-      </div>
-    </Link>
+          <img
+            src={ src }
+            data-testid={ `${index}-card-img` }
+            alt={ alt }
+          />
+          <h3
+            data-testid={ `${index}-card-name` }
+          >
+            { label }
+          </h3>
+        </div>
+      </Link>
+    </div>
   );
 }
 
