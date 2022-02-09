@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 
 function CardFavoriteDrink({ recipe }) {
   return (
@@ -16,7 +16,7 @@ function CardFavoriteDrink({ recipe }) {
 }
 
 CardFavoriteDrink.propTypes = {
-  recipe: PropTypes.objectOf(string),
-}.isRequired;
+  recipe: PropTypes.objectOf(string).isRequired,
+};
 
 export default CardFavoriteDrink;

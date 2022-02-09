@@ -3,6 +3,7 @@ import copy from 'clipboard-copy';
 import CardFavoriteDrink from '../../components/cardFavorite/CardFavoriteDrink';
 import CardFavoriteFood from '../../components/cardFavorite/CardFavoriteFood';
 import Header from '../../components/header/Header';
+import shareIcon from '../../images/shareIcon.svg';
 
 function FavoriteRecipes() {
   const [favRecipes, setFavRecipes] = useState('');
@@ -12,7 +13,6 @@ function FavoriteRecipes() {
       const recipeFavorites = localStorage.getItem('favoriteRecipes');
       const arrFavoriteRecipes = JSON.parse(recipeFavorites);
       setFavRecipes(arrFavoriteRecipes);
-      // console.log(recipeFavorites);
     };
     getFavoriteRecipe();
   }, []);
@@ -39,17 +39,40 @@ function FavoriteRecipes() {
       />
       { favRecipes && favRecipes.map((recipe, i) => (
         recipe.type === 'food' ? (
-          <CardFavoriteFood
-            recipe={ recipe }
-            key={ i }
-          />
-        )
-          : (
+          <div key={ i }>
+            <CardFavoriteFood
+              recipe={ recipe }
+            />
+            <button
+              type="button"
+              onClick={ () => linkC(recipe) }
+            >
+              <img
+                data-testid={ `${i}-horizontal-share-btn` }
+                src={ shareIcon }
+                alt="share icon"
+              />
+            </button>
+            { linkCopy ? <p>Link copied!</p> : null }
+          </div>
+        ) : (
+          <div key={ i }>
             <CardFavoriteDrink
               recipe={ recipe }
-              key={ i }
             />
-          )
+            <button
+              type="button"
+              onClick={ () => linkC(recipe) }
+            >
+              <img
+                data-testid={ `${i}-horizontal-share-btn` }
+                src={ shareIcon }
+                alt="share icon"
+              />
+            </button>
+            { linkCopy ? <p>Link copied!</p> : null }
+          </div>
+        )
       ))}
     </div>
   );

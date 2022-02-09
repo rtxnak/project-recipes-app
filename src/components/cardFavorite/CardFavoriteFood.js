@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes, { string } from 'prop-types';
 
 function CardFavoriteFood({ recipe }) {
-  console.log(recipe);
   return (
     <div>
       <img
@@ -17,7 +17,7 @@ function CardFavoriteFood({ recipe }) {
 }
 
 CardFavoriteFood.propTypes = {
-  recipe: PropTypes.objectOf(string),
-}.isRequired;
+  recipe: PropTypes.objectOf(string).isRequired,
+};
 
 export default CardFavoriteFood;
