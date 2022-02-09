@@ -7,16 +7,16 @@ const CardExplore = ({ index, img, name, id }) => (
   <Link to={ `/foods/${id}` }>
     <div
       data-testid={ `${index}-recipe-card` }
+      className="cardExplore"
     >
-      <h3 data-testid={ `${index}-card-name` }>
-        { name }
-      </h3>
       <img
         data-testid={ `${index}-card-img` }
         src={ img }
         alt="description"
-        width="200px"
       />
+      <h3 data-testid={ `${index}-card-name` }>
+        { name }
+      </h3>
     </div>
   </Link>
 );

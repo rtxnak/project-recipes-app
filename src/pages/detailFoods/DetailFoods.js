@@ -105,60 +105,71 @@ function DetailFoods() {
         && (
           <div>
             <img
+              className="image-recipe"
               data-testid="recipe-photo"
               src={ returnAPI.meals[0].strMealThumb }
               alt="img"
-              width="200px"
             />
-            <title
-              data-testid="recipe-title"
-            >
-              { returnAPI.meals[0].strMeal }
-            </title>
-            <button
-              data-testid="share-btn"
-              type="button"
-              onClick={ linkC }
-            >
-              <img src={ shareImg } alt="share icon" />
-            </button>
-            { linkCopy ? <p>Link copied!</p> : null }
-            { !favoriteButt
-              ? (
-                <button
-                  type="button"
-                  onClick={ () => {
-                    favoriteFood(returnAPI);
-                    setFavoriteButt(true);
-                  } }
-                >
-                  <img
-                    data-testid="favorite-btn"
-                    src={ whiteHeartIcon }
-                    alt="whiteHeartIcon"
-                  />
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={ () => {
-                    removeFavoriteFood();
-                    setFavoriteButt(false);
-                  } }
-                >
-                  <img
-                    data-testid="favorite-btn"
-                    src={ blackHeartIcon }
-                    alt="blackHeartIcon"
-                  />
-                </button>
-              ) }
-            <p data-testid="recipe-category">{ returnAPI.meals[0].strCategory }</p>
+            <div className="category-share-fav">
+              <title
+                data-testid="recipe-title"
+              >
+                { returnAPI.meals[0].strMeal }
+              </title>
+              <button
+                data-testid="share-btn"
+                type="button"
+                onClick={ linkC }
+              >
+                <img className="share" src={ shareImg } alt="share icon" />
+              </button>
+              { linkCopy ? <p>Link copied!</p> : null }
+              { !favoriteButt
+                ? (
+                  <button
+                    type="button"
+                    onClick={ () => {
+                      favoriteFood(returnAPI);
+                      setFavoriteButt(true);
+                    } }
+                  >
+                    <img
+                      className="heart"
+                      data-testid="favorite-btn"
+                      src={ whiteHeartIcon }
+                      alt="whiteHeartIcon"
+                    />
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={ () => {
+                      removeFavoriteFood();
+                      setFavoriteButt(false);
+                    } }
+                  >
+                    <img
+                      className="heart"
+                      data-testid="favorite-btn"
+                      src={ blackHeartIcon }
+                      alt="blackHeartIcon"
+                    />
+                  </button>
+                ) }
+              <p
+                data-testid="recipe-category"
+              >
+                { ` Category: ${returnAPI.meals[0].strCategory}` }
+              </p>
+            </div>
             <IngredientsList
               ingredients={ filterIngredientsFunc(returnAPI) }
               measures={ filterMeasuresFunc(returnAPI) }
             />
-            <div data-testid="instructions">
+            <div
+              data-testid="instructions"
+              className="instructions"
+            >
               { returnAPI.meals[0].strInstructions }
             </div>
             <div data-testid="video">
@@ -173,7 +184,7 @@ function DetailFoods() {
                 title="Embedded youtube"
               />
             </div>
-            {startOrContinueButton(returnAPI.meals[0])}
+            { startOrContinueButton(returnAPI.meals[0]) }
             <RecomendationCard />
           </div>
         )

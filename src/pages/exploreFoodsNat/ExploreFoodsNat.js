@@ -1,4 +1,5 @@
-import React, { useEffect,
+import React, {
+  useEffect,
   useState,
 } from 'react';
 import Footer from '../../components/footer/Footer';
@@ -7,6 +8,7 @@ import fetchNationalitiesAPI from '../../services/fetchAPINationalities';
 import fetchRecipesNationalitiesAPI from '../../services/fetchAPIByNationalities';
 import fetchAPI from '../../services/fetchAPI';
 import CardExplore from '../../components/cardExplore/CardExplore';
+import './ExploreFoodsNat.css';
 
 function ExploreFoodsNat() {
   const [filter, setFilter] = useState('All');
@@ -51,32 +53,34 @@ function ExploreFoodsNat() {
         label="Explore Nationalities"
         testid="page-title"
       />
-      { nationalitiesAPI && (
-        <label htmlFor="nationalities">
-          <select
-            data-testid="explore-by-nationality-dropdown"
-            name="nationalities"
-            onChange={ handleValueFilter }
-            value={ filter }
-          >
-            <option
-              value="All"
-              data-testid="All-option"
+      <div className="select-nationalities">
+        { nationalitiesAPI && (
+          <label htmlFor="nationalities">
+            <select
+              data-testid="explore-by-nationality-dropdown"
+              name="nationalities"
+              onChange={ handleValueFilter }
+              value={ filter }
             >
-              All
-            </option>
-            { nationalitiesAPI.meals.map((value) => (
               <option
-                key={ value.strArea }
-                value={ value.strArea }
-                data-testid={ `${value.strArea}-option` }
+                value="All"
+                data-testid="All-option"
               >
-                { value.strArea }
+                All
               </option>
-            )) }
-          </select>
-        </label>
-      ) }
+              { nationalitiesAPI.meals.map((value) => (
+                <option
+                  key={ value.strArea }
+                  value={ value.strArea }
+                  data-testid={ `${value.strArea}-option` }
+                >
+                  { value.strArea }
+                </option>
+              )) }
+            </select>
+          </label>
+        ) }
+      </div>
       { recipes && recipes.meals.slice(0, TWELVE).map((value, i) => (
         <CardExplore
           index={ i }

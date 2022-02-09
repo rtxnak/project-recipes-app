@@ -26,17 +26,16 @@ function IngredientCard(props) {
   };
 
   return (
-    <Link
-      to={ () => redirectByPathname() }
-      onClick={ () => {
-        filterByIngredient(label);
-      } }
-    >
-      <div
-        className="ingredientCard"
-        data-testid={ `${index}-ingredient-card` }
+    <div className="ingredient-card">
+      <Link
+        to={ () => redirectByPathname() }
+        onClick={ () => {
+          filterByIngredient(label);
+        } }
       >
-        <div>
+        <div
+          data-testid={ `${index}-ingredient-card` }
+        >
           <img
             src={ src }
             data-testid={ `${index}-card-img` }
@@ -48,8 +47,8 @@ function IngredientCard(props) {
             { label }
           </h3>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
 

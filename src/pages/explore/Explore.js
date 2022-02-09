@@ -22,18 +22,20 @@ function Explore() {
         label="Explore"
         testid="page-title"
       />
-      <Button
-        type="button"
-        testid="explore-foods"
-        label="Explore Foods"
-        onClick={ handleClickFoods }
-      />
-      <Button
-        type="button"
-        testid="explore-drinks"
-        label="Explore Drinks"
-        onClick={ handleClickDrink }
-      />
+      <div className="button-explore">
+        <Button
+          type="button"
+          testid="explore-foods"
+          label="Explore Foods"
+          onClick={ handleClickFoods }
+        />
+        <Button
+          type="button"
+          testid="explore-drinks"
+          label="Explore Drinks"
+          onClick={ handleClickDrink }
+        />
+      </div>
       <Footer />
     </div>
   );

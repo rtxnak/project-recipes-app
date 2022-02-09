@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Input.css';
 
 function Input(props) {
   const { placeholder, name, onChange, type, testid, value = '' } = props;
@@ -7,6 +8,7 @@ function Input(props) {
     <div>
       <label htmlFor={ name }>
         <input
+          className="input"
           data-testid={ testid }
           type={ type }
           placeholder={ placeholder }

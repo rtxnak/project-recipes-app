@@ -1,5 +1,7 @@
-.buttonstart {
-    bottom: 0;
-    position: fixed;
-  }
-  
+.explore-drinks{
+  display: flex;
+  flex-direction: column;
+  margin-top: 70px;
+  margin-bottom: 195px;
+  box-shadow: 5px 3px 3px gray;
+}

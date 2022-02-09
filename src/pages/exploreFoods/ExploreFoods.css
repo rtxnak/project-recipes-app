@@ -1,10 +1,8 @@
   .exploreFoods{
     display: flex;
-    justify-content:space-between;
-    /* background-color: #a3a380;
-    align-items: flex-start;
-    height: 55px;
-    font-size: 12px;
-    font-family: 'Work Sans', sans-serif; */
+    flex-direction: column;
+    margin-top: 70px;
+    margin-bottom: 178px;
+    box-shadow: 5px 3px 3px gray;
   }
   

@@ -25,7 +25,7 @@ function ExploreDrinks() {
         label="Explore Drinks"
         testid="page-title"
       />
-      <div className="exploreDrinks">
+      <div className="explore-drinks">
         <button
           type="button"
           data-testid="explore-by-ingredient"
