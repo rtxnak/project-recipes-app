@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/project-recipes-app/static/css/main.6f527af8.css",
-    "main.js": "/project-recipes-app/static/js/main.ddf1c8b8.js",
+    "main.js": "/project-recipes-app/static/js/main.2ac5fbcc.js",
     "static/media/fundofrutas.jpg": "/project-recipes-app/static/media/fundofrutas.9997dae8fe87f3cc9263.jpg",
     "static/media/exploreIcon.svg": "/project-recipes-app/static/media/exploreIcon.076346236f69318885d7f53b65f0e4c7.svg",
     "static/media/mealIcon.svg": "/project-recipes-app/static/media/mealIcon.40029e7f1422ba5a1bf1c10fa4f59030.svg",
@@ -18,10 +18,10 @@
     "static/media/person.svg": "/project-recipes-app/static/media/person.1694d0ed32ad6aedeaf442ce564bc2cb.svg",
     "static/media/lock.svg": "/project-recipes-app/static/media/lock.9c682a8caa8ceb8b9599bb8fa7c6a59a.svg",
     "main.6f527af8.css.map": "/project-recipes-app/static/css/main.6f527af8.css.map",
-    "main.ddf1c8b8.js.map": "/project-recipes-app/static/js/main.ddf1c8b8.js.map"
+    "main.2ac5fbcc.js.map": "/project-recipes-app/static/js/main.2ac5fbcc.js.map"
   },
   "entrypoints": [
     "static/css/main.6f527af8.css",
-    "static/js/main.ddf1c8b8.js"
+    "static/js/main.2ac5fbcc.js"
   ]
 }
