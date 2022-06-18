@@ -11,12 +11,11 @@ The database used was https://www.themealdb.com/api.php , an open, crowd-sourced
 
 ## Skills 
 
-  - Use _Redux_ to manage state
-  - Use the _React-Redux_ library
-  - Use the _React_ Context API to manage state
-  - Using the _React Hook useState_
-  - Using the _React Hook useContext_
-  - Using the _React Hook useEffect_
+  - Use the _React_, _HTML_, _CSS_ to create the pages;
+  - Use the _React_ Context API to manage state;
+  - Using the _React Hook useState_;
+  - Using the _React Hook useContext_;
+  - Using the _React Hook useEffect_;
   - Create custom Hooks
 
 ## Opening the app locally
@@ -42,4 +41,4 @@ This project was developed in mobile first but is responsive, for better navigat
 
 https://rtxnak.github.io/project-recipes-app/#/
 
-OBS: to do the login you can use any email with the format email@email.com and password with length at least 6 characters
+OBS: to do the login you can use any email with the format email@email.com and password with length at least 7 characters
